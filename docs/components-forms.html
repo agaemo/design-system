@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forms — Components — Design System</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="components.css">
+  <style>
+    .comp-preview {
+      background: var(--bg-base);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: var(--space-6);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+    .comp-preview + pre.code {
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      margin-top: 0;
+      border-top: none;
+    }
+    .comp-preview.col { flex-direction: column; }
+    .comp-section { margin-bottom: var(--space-12); }
+    .comp-section h3 { margin: var(--space-8) 0 var(--space-2); font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+    .comp-note { font-size: var(--font-size-xs); color: var(--text-muted); margin: var(--space-2) 0 var(--space-4); }
+    .w-full { width: 100%; }
+    .w-64 { width: 256px; }
+    .w-80 { width: 320px; }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar-mount"></aside>
+
+<main class="main">
+  <h1>Forms</h1>
+  <p style="font-size:var(--font-size-sm);color:var(--text-secondary);line-height:var(--line-height-relaxed);margin-bottom:var(--space-2)">
+    Input / Textarea / Select / Checkbox / Toggle。フォームコントロールはすべて <code>form-group</code> でラップし、ラベル・ヘルパー・エラーをセットで扱う。
+  </p>
+  <p style="font-size:var(--font-size-xs);color:var(--text-muted);margin-bottom:var(--space-8)">React では <code>class</code> → <code>className</code>、<code>for</code> → <code>htmlFor</code> に読み替える。</p>
+
+  <!-- ===== Input ===== -->
+  <section id="input" class="comp-section">
+    <h2>Input</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      1行のテキスト入力。<code>form-group</code> でラベル・入力・ヘルパーをまとめる。
+    </p>
+
+    <h3>通常</h3>
+    <div class="comp-preview">
+      <div class="form-group w-80">
+        <label class="form-label" for="ex-email">
+          メールアドレス<span class="form-required">*</span>
+        </label>
+        <input class="form-input" id="ex-email" type="email" placeholder="you@example.com">
+        <span class="form-helper">ログインに使用します</span>
+      </div>
+    </div>
+    <pre class="code">&lt;div class=<span class="s">"form-group"</span>&gt;
+  &lt;label class=<span class="s">"form-label"</span> for=<span class="s">"email"</span>&gt;
+    メールアドレス&lt;span class=<span class="s">"form-required"</span>&gt;*&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;input class=<span class="s">"form-input"</span> id=<span class="s">"email"</span> type=<span class="s">"email"</span> placeholder=<span class="s">"you@example.com"</span>&gt;
+  &lt;span class=<span class="s">"form-helper"</span>&gt;ログインに使用します&lt;/span&gt;
+&lt;/div&gt;</pre>
+
+    <h3>エラー状態</h3>
+    <div class="comp-preview">
+      <div class="form-group w-80">
+        <label class="form-label" for="ex-username">ユーザー名</label>
+        <input class="form-input is-error" id="ex-username" type="text" value="invalid user">
+        <span class="form-error">使用できない文字が含まれています</span>
+      </div>
+    </div>
+    <pre class="code"><span class="c">&lt;!-- エラー時: input に is-error クラスを追加 + form-error を表示 --&gt;</span>
+&lt;div class=<span class="s">"form-group"</span>&gt;
+  &lt;label class=<span class="s">"form-label"</span> for=<span class="s">"username"</span>&gt;ユーザー名&lt;/label&gt;
+  &lt;input class=<span class="s">"form-input is-error"</span> id=<span class="s">"username"</span> type=<span class="s">"text"</span> value=<span class="s">"invalid user"</span>&gt;
+  &lt;span class=<span class="s">"form-error"</span>&gt;使用できない文字が含まれています&lt;/span&gt;
+&lt;/div&gt;</pre>
+
+    <h3>無効</h3>
+    <div class="comp-preview">
+      <div class="form-group w-80">
+        <label class="form-label" for="ex-disabled">登録メール</label>
+        <input class="form-input" id="ex-disabled" type="text" value="registered@example.com" disabled>
+        <span class="form-helper">変更するにはサポートへお問い合わせください</span>
+      </div>
+    </div>
+    <pre class="code">&lt;div class=<span class="s">"form-group"</span>&gt;
+  &lt;label class=<span class="s">"form-label"</span> for=<span class="s">"email"</span>&gt;登録メール&lt;/label&gt;
+  &lt;input class=<span class="s">"form-input"</span> id=<span class="s">"email"</span> type=<span class="s">"text"</span> value=<span class="s">"registered@example.com"</span> disabled&gt;
+  &lt;span class=<span class="s">"form-helper"</span>&gt;変更するにはサポートへお問い合わせください&lt;/span&gt;
+&lt;/div&gt;</pre>
+  </section>
+
+  <!-- ===== Textarea ===== -->
+  <section id="textarea" class="comp-section">
+    <h2>Textarea</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      複数行テキスト入力。Input と同じクラス体系を使い、一貫した見た目を保つ。
+    </p>
+
+    <h3>基本</h3>
+    <div class="comp-preview">
+      <div class="form-group w-full">
+        <label class="form-label" for="ex-comment">コメント</label>
+        <textarea class="form-textarea" id="ex-comment" placeholder="内容を入力してください..."></textarea>
+        <span class="form-helper">最大 500 文字</span>
+      </div>
+    </div>
+    <pre class="code">&lt;div class=<span class="s">"form-group"</span>&gt;
+  &lt;label class=<span class="s">"form-label"</span> for=<span class="s">"comment"</span>&gt;コメント&lt;/label&gt;
+  &lt;textarea class=<span class="s">"form-textarea"</span> id=<span class="s">"comment"</span> placeholder=<span class="s">"内容を入力してください..."</span>&gt;&lt;/textarea&gt;
+  &lt;span class=<span class="s">"form-helper"</span>&gt;最大 500 文字&lt;/span&gt;
+&lt;/div&gt;</pre>
+  </section>
+
+  <!-- ===== Select ===== -->
+  <section id="select" class="comp-section">
+    <h2>Select</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      選択肢が 5〜7 個以内の場合に使う。それ以上はコンボボックス（検索付きドロップダウン）を検討する。
+    </p>
+
+    <h3>基本</h3>
+    <div class="comp-preview">
+      <div class="form-group w-64">
+        <label class="form-label" for="ex-lang">言語</label>
+        <select class="form-select" id="ex-lang">
+          <option value="">選択してください</option>
+          <option value="ja">日本語</option>
+          <option value="en">English</option>
+          <option value="zh">中文</option>
+        </select>
+      </div>
+    </div>
+    <pre class="code">&lt;div class=<span class="s">"form-group"</span>&gt;
+  &lt;label class=<span class="s">"form-label"</span> for=<span class="s">"lang"</span>&gt;言語&lt;/label&gt;
+  &lt;select class=<span class="s">"form-select"</span> id=<span class="s">"lang"</span>&gt;
+    &lt;option value=<span class="s">""</span>&gt;選択してください&lt;/option&gt;
+    &lt;option value=<span class="s">"ja"</span>&gt;日本語&lt;/option&gt;
+    &lt;option value=<span class="s">"en"</span>&gt;English&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;</pre>
+  </section>
+
+  <!-- ===== Checkbox ===== -->
+  <section id="checkbox" class="comp-section">
+    <h2>Checkbox</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      複数選択・同意確認に使う。チェック色は <code>accent-color</code> でデザイントークンの accent に統一される。
+    </p>
+
+    <h3>基本（ヒントテキスト付き）</h3>
+    <div class="comp-preview col">
+      <label class="checkbox-wrap">
+        <input type="checkbox" class="checkbox-input" checked>
+        <div class="checkbox-text">
+          <span class="checkbox-label">利用規約に同意する</span>
+          <span class="checkbox-hint">続行するには同意が必要です</span>
+        </div>
+      </label>
+    </div>
+    <pre class="code">&lt;label class=<span class="s">"checkbox-wrap"</span>&gt;
+  &lt;input type=<span class="s">"checkbox"</span> class=<span class="s">"checkbox-input"</span> checked&gt;
+  &lt;div class=<span class="s">"checkbox-text"</span>&gt;
+    &lt;span class=<span class="s">"checkbox-label"</span>&gt;利用規約に同意する&lt;/span&gt;
+    &lt;span class=<span class="s">"checkbox-hint"</span>&gt;続行するには同意が必要です&lt;/span&gt;  <span class="c">&lt;!-- 省略可 --&gt;</span>
+  &lt;/div&gt;
+&lt;/label&gt;</pre>
+
+    <h3>無効</h3>
+    <div class="comp-preview col">
+      <label class="checkbox-wrap" style="opacity:0.45;cursor:not-allowed">
+        <input type="checkbox" class="checkbox-input" disabled>
+        <div class="checkbox-text">
+          <span class="checkbox-label">変更不可の設定</span>
+        </div>
+      </label>
+    </div>
+    <pre class="code"><span class="c">&lt;!-- disabled 時は label にも opacity を適用する --&gt;</span>
+&lt;label class=<span class="s">"checkbox-wrap"</span> style=<span class="s">"opacity:0.45;cursor:not-allowed"</span>&gt;
+  &lt;input type=<span class="s">"checkbox"</span> class=<span class="s">"checkbox-input"</span> disabled&gt;
+  &lt;div class=<span class="s">"checkbox-text"</span>&gt;
+    &lt;span class=<span class="s">"checkbox-label"</span>&gt;変更不可の設定&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/label&gt;</pre>
+    <p class="comp-note">disabled 時の opacity と cursor は CSS クラス化しておくと管理しやすい（例: <code>.checkbox-wrap.is-disabled</code>）。</p>
+  </section>
+
+  <!-- ===== Toggle ===== -->
+  <section id="toggle" class="comp-section">
+    <h2>Toggle / Switch</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      即時に反映される設定のオン/オフに使う。Checkbox との違いは<strong>即時性</strong>——確認ダイアログが不要な操作に向く。
+    </p>
+
+    <h3>ON 状態</h3>
+    <div class="comp-preview col">
+      <label class="toggle-wrap" onclick="this.querySelector('.toggle-track').classList.toggle('on')">
+        <div class="toggle-track on"><div class="toggle-thumb"></div></div>
+        <span class="toggle-label">通知をオンにする</span>
+      </label>
+    </div>
+    <pre class="code"><span class="c">&lt;!-- ON: toggle-track に .on を追加、OFF: .on を外す --&gt;</span>
+&lt;label class=<span class="s">"toggle-wrap"</span>&gt;
+  &lt;div class=<span class="s">"toggle-track on"</span>&gt;
+    &lt;div class=<span class="s">"toggle-thumb"</span>&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;span class=<span class="s">"toggle-label"</span>&gt;通知をオンにする&lt;/span&gt;
+&lt;/label&gt;</pre>
+
+    <h3>OFF 状態</h3>
+    <div class="comp-preview col">
+      <label class="toggle-wrap" onclick="this.querySelector('.toggle-track').classList.toggle('on')">
+        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+        <span class="toggle-label">ダークモード</span>
+      </label>
+    </div>
+    <pre class="code">&lt;label class=<span class="s">"toggle-wrap"</span>&gt;
+  &lt;div class=<span class="s">"toggle-track"</span>&gt;  <span class="c">&lt;!-- .on なし = OFF --&gt;</span>
+    &lt;div class=<span class="s">"toggle-thumb"</span>&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;span class=<span class="s">"toggle-label"</span>&gt;ダークモード&lt;/span&gt;
+&lt;/label&gt;</pre>
+
+    <p class="comp-note" style="margin-top:var(--space-4)">React での実装例:</p>
+    <pre class="code"><span class="c">// const [on, setOn] = useState(false)</span>
+&lt;label className=<span class="s">"toggle-wrap"</span> onClick=<span class="s">{() =&gt; setOn(!on)}</span>&gt;
+  &lt;div className=<span class="s">{`toggle-track ${on ? 'on' : ''}`}</span>&gt;
+    &lt;div className=<span class="s">"toggle-thumb"</span> /&gt;
+  &lt;/div&gt;
+  &lt;span className=<span class="s">"toggle-label"</span>&gt;通知をオンにする&lt;/span&gt;
+&lt;/label&gt;</pre>
+  </section>
+
+</main>
+
+<script type="module" src="_layout.js"></script>
+</body>
+</html>

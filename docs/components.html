@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actions — Components — Design System</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="components.css">
+  <style>
+    .comp-preview {
+      background: var(--bg-base);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: var(--space-6);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .comp-preview + pre.code {
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      margin-top: 0;
+      border-top: none;
+    }
+    .comp-preview.col { flex-direction: column; align-items: flex-start; }
+    .comp-section { margin-bottom: var(--space-12); }
+    .comp-section h3 { margin: var(--space-8) 0 var(--space-2); font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+    .comp-note { font-size: var(--font-size-xs); color: var(--text-muted); margin: var(--space-2) 0 var(--space-4); }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar-mount"></aside>
+
+<main class="main">
+  <h1>Actions</h1>
+  <p style="font-size:var(--font-size-sm);color:var(--text-secondary);line-height:var(--line-height-relaxed);margin-bottom:var(--space-2)">
+    Button / Badge / Spinner / Tooltip。プレビューの直下にそれを生成する HTML を示す。
+  </p>
+  <p style="font-size:var(--font-size-xs);color:var(--text-muted);margin-bottom:var(--space-8)">React では <code>class</code> → <code>className</code>、<code>for</code> → <code>htmlFor</code> に読み替える。</p>
+
+  <!-- ===== Button ===== -->
+  <section id="button" class="comp-section">
+    <h2>Button</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      アクションを起こすための要素。重要度に応じてバリアントを使い分ける。<strong>Primary は画面内に 1 つが原則。</strong>
+    </p>
+
+    <h3>バリアント</h3>
+    <div class="comp-preview">
+      <button class="btn btn-primary">送信</button>
+      <button class="btn btn-outline">キャンセル</button>
+      <button class="btn btn-ghost">詳細</button>
+      <button class="btn btn-danger">削除</button>
+    </div>
+    <pre class="code">&lt;button class=<span class="s">"btn btn-primary"</span>&gt;送信&lt;/button&gt;
+&lt;button class=<span class="s">"btn btn-outline"</span>&gt;キャンセル&lt;/button&gt;
+&lt;button class=<span class="s">"btn btn-ghost"</span>&gt;詳細&lt;/button&gt;
+&lt;button class=<span class="s">"btn btn-danger"</span>&gt;削除&lt;/button&gt;</pre>
+
+    <h3>サイズ</h3>
+    <div class="comp-preview">
+      <button class="btn btn-primary btn-sm">Small</button>
+      <button class="btn btn-primary">Medium</button>
+      <button class="btn btn-primary btn-lg">Large</button>
+    </div>
+    <pre class="code">&lt;button class=<span class="s">"btn btn-primary btn-sm"</span>&gt;Small&lt;/button&gt;
+&lt;button class=<span class="s">"btn btn-primary"</span>&gt;Medium&lt;/button&gt;
+&lt;button class=<span class="s">"btn btn-primary btn-lg"</span>&gt;Large&lt;/button&gt;</pre>
+
+    <h3>無効 / ローディング</h3>
+    <div class="comp-preview">
+      <button class="btn btn-primary" disabled>Disabled</button>
+      <button class="btn btn-primary" disabled>
+        <span class="spinner spinner-sm" style="border-color:rgba(255,255,255,.3);border-top-color:white"></span>
+        保存中...
+      </button>
+    </div>
+    <pre class="code"><span class="c">&lt;!-- 無効 --&gt;</span>
+&lt;button class=<span class="s">"btn btn-primary"</span> disabled&gt;Disabled&lt;/button&gt;
+
+<span class="c">&lt;!-- ローディング: disabled + spinner を組み合わせる --&gt;</span>
+<span class="c">&lt;!-- spinner の border 色は白系に変える（背景が濃いため） --&gt;</span>
+&lt;button class=<span class="s">"btn btn-primary"</span> disabled&gt;
+  &lt;span class=<span class="s">"spinner spinner-sm"</span>
+        style=<span class="s">"border-color:rgba(255,255,255,.3);border-top-color:white"</span>&gt;&lt;/span&gt;
+  保存中...
+&lt;/button&gt;</pre>
+    <p class="comp-note">Spinner の色 override だけは inline style を使う。CSS クラスにしてもよいが、使う場所が limited のため。</p>
+
+    <h3>リンクとして使う</h3>
+    <div class="comp-preview">
+      <a href="#" class="btn btn-primary">次のページへ</a>
+      <a href="#" class="btn btn-outline">戻る</a>
+    </div>
+    <pre class="code"><span class="c">&lt;!-- &lt;a&gt; タグに同じクラスを付けるだけ --&gt;</span>
+&lt;a href=<span class="s">"/next"</span> class=<span class="s">"btn btn-primary"</span>&gt;次のページへ&lt;/a&gt;
+&lt;a href=<span class="s">"/back"</span> class=<span class="s">"btn btn-outline"</span>&gt;戻る&lt;/a&gt;</pre>
+  </section>
+
+  <!-- ===== Badge ===== -->
+  <section id="badge" class="comp-section">
+    <h2>Badge</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      ステータス・カテゴリを示す小さなラベル。テキストだけでは状態が伝わりにくいときに補助として使う。
+    </p>
+
+    <h3>バリアント</h3>
+    <div class="comp-preview">
+      <span class="badge badge-neutral">Draft</span>
+      <span class="badge badge-accent">New</span>
+      <span class="badge badge-success">公開中</span>
+      <span class="badge badge-warning">レビュー待ち</span>
+      <span class="badge badge-error">エラー</span>
+      <span class="badge badge-info">情報</span>
+    </div>
+    <pre class="code">&lt;span class=<span class="s">"badge badge-neutral"</span>&gt;Draft&lt;/span&gt;
+&lt;span class=<span class="s">"badge badge-accent"</span>&gt;New&lt;/span&gt;
+&lt;span class=<span class="s">"badge badge-success"</span>&gt;公開中&lt;/span&gt;
+&lt;span class=<span class="s">"badge badge-warning"</span>&gt;レビュー待ち&lt;/span&gt;
+&lt;span class=<span class="s">"badge badge-error"</span>&gt;エラー&lt;/span&gt;
+&lt;span class=<span class="s">"badge badge-info"</span>&gt;情報&lt;/span&gt;</pre>
+
+    <h3>テキストと組み合わせる</h3>
+    <div class="comp-preview col">
+      <div style="display:flex;align-items:center;gap:var(--space-2)">
+        <span style="font-size:var(--font-size-sm);color:var(--text-primary);font-weight:var(--font-weight-medium)">山田 太郎</span>
+        <span class="badge badge-accent">管理者</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:var(--space-2)">
+        <span style="font-size:var(--font-size-sm);color:var(--text-primary)">タスク名</span>
+        <span class="badge badge-warning">期限超過</span>
+      </div>
+    </div>
+    <pre class="code"><span class="c">&lt;!-- インラインで並べる場合は flex コンテナで囲む --&gt;</span>
+&lt;div style=<span class="s">"display:flex;align-items:center;gap:8px"</span>&gt;
+  &lt;span&gt;山田 太郎&lt;/span&gt;
+  &lt;span class=<span class="s">"badge badge-accent"</span>&gt;管理者&lt;/span&gt;
+&lt;/div&gt;
+&lt;div style=<span class="s">"display:flex;align-items:center;gap:8px"</span>&gt;
+  &lt;span&gt;タスク名&lt;/span&gt;
+  &lt;span class=<span class="s">"badge badge-warning"</span>&gt;期限超過&lt;/span&gt;
+&lt;/div&gt;</pre>
+  </section>
+
+  <!-- ===== Spinner ===== -->
+  <section id="spinner" class="comp-section">
+    <h2>Spinner</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      処理中の待機状態を示す。所要時間が不明な非同期処理に使う。
+    </p>
+
+    <h3>サイズ</h3>
+    <div class="comp-preview">
+      <span class="spinner spinner-sm"></span>
+      <span class="spinner spinner-md"></span>
+      <span class="spinner spinner-lg"></span>
+    </div>
+    <pre class="code"><span class="c">&lt;!-- spinner-sm (14px) / spinner-md (20px) / spinner-lg (32px) --&gt;</span>
+&lt;span class=<span class="s">"spinner spinner-sm"</span>&gt;&lt;/span&gt;
+&lt;span class=<span class="s">"spinner spinner-md"</span>&gt;&lt;/span&gt;
+&lt;span class=<span class="s">"spinner spinner-lg"</span>&gt;&lt;/span&gt;</pre>
+
+    <h3>ページ全体のローディング</h3>
+    <div class="comp-preview" style="justify-content:center;padding:var(--space-10)">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-3)">
+        <span class="spinner spinner-lg"></span>
+        <span style="font-size:var(--font-size-sm);color:var(--text-secondary)">読み込み中...</span>
+      </div>
+    </div>
+    <pre class="code">&lt;div class=<span class="s">"loading-screen"</span>&gt;  <span class="c">&lt;!-- flex + center のレイアウトクラスを用意する --&gt;</span>
+  &lt;span class=<span class="s">"spinner spinner-lg"</span>&gt;&lt;/span&gt;
+  &lt;span&gt;読み込み中...&lt;/span&gt;
+&lt;/div&gt;</pre>
+  </section>
+
+  <!-- ===== Tooltip ===== -->
+  <section id="tooltip" class="comp-section">
+    <h2>Tooltip</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      ホバーで補足情報を表示する。ラベルのないアイコンボタンや略語の説明に使う。長文・操作が必要なコンテンツには使わない。
+    </p>
+
+    <h3>基本</h3>
+    <div class="comp-preview" style="padding-top:var(--space-10)">
+      <span class="tooltip-wrap">
+        <button class="btn btn-outline">ホバーで確認</button>
+        <span class="tooltip-bubble">これがツールチップです</span>
+      </span>
+      <span class="tooltip-wrap">
+        <button class="btn btn-ghost btn-sm">?</button>
+        <span class="tooltip-bubble">ヘルプテキスト</span>
+      </span>
+    </div>
+    <pre class="code"><span class="c">&lt;!-- tooltip-wrap で囲むだけ。ホバーで tooltip-bubble が表示される --&gt;</span>
+&lt;span class=<span class="s">"tooltip-wrap"</span>&gt;
+  &lt;button class=<span class="s">"btn btn-outline"</span>&gt;ホバーで確認&lt;/button&gt;
+  &lt;span class=<span class="s">"tooltip-bubble"</span>&gt;これがツールチップです&lt;/span&gt;
+&lt;/span&gt;
+
+<span class="c">&lt;!-- アイコンボタンのラベル代わり --&gt;</span>
+&lt;span class=<span class="s">"tooltip-wrap"</span>&gt;
+  &lt;button class=<span class="s">"btn btn-ghost btn-sm"</span>&gt;?&lt;/button&gt;
+  &lt;span class=<span class="s">"tooltip-bubble"</span>&gt;ヘルプテキスト&lt;/span&gt;
+&lt;/span&gt;</pre>
+  </section>
+
+</main>
+
+<script type="module" src="_layout.js"></script>
+</body>
+</html>

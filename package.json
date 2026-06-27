@@ -1,0 +1,19 @@
+{
+  "name": "@agaemo/design-system",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "bun sd.config.ts && mkdir -p docs/css && cp css/variables.css docs/css/variables.css && vite build",
+    "build:tokens": "bun sd.config.ts && mkdir -p docs/css && cp css/variables.css docs/css/variables.css",
+    "lint": "oxlint .",
+    "format": "oxfmt ."
+  },
+  "devDependencies": {
+    "oxfmt": "^0.56.0",
+    "oxlint": "^1.71.0",
+    "style-dictionary": "^4.0.0",
+    "vite": "7"
+  }
+}

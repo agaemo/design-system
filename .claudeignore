@@ -1,0 +1,7 @@
+node_modules/
+dist/
+bun.lock
+
+# Style Dictionary ビルド成果物（tokens/ の JSON が正典）
+css/variables.css
+docs/css/variables.css

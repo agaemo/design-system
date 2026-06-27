@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spacing — Design System</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar-mount"></aside>
+
+<main class="main">
+  <section id="spacing" class="section-anchor">
+    <h2>Spacing</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);line-height:var(--line-height-relaxed);margin-bottom:var(--space-5)">
+      4px を基本単位としたスペーシングスケール。Tailwind のデフォルト数値スケール（<code>p-4</code> = 16px）と値が一致しており、Tailwind クラスをそのまま使える。CSS 変数（<code>var(--space-4)</code>）は Tailwind を使わないプロジェクトや、CSS で直接計算が必要な場面で使う。<strong>スケール外の任意 px 値はハードコードしない。</strong>
+    </p>
+
+    <h3>Padding（内側の余白）</h3>
+    <table class="token-table">
+      <thead>
+        <tr><th>用途</th><th>Tailwind クラス</th><th>CSS 変数</th><th>値</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="tt-purpose">小さなボタン・バッジ</td><td class="tt-tw">px-2 py-1</td><td class="tt-css">var(--space-2) / var(--space-1)</td><td class="tt-css">8px / 4px</td></tr>
+        <tr><td class="tt-purpose">ボタン・タグ（標準）</td><td class="tt-tw">px-4 py-2</td><td class="tt-css">var(--space-4) / var(--space-2)</td><td class="tt-css">16px / 8px</td></tr>
+        <tr><td class="tt-purpose">入力欄・セレクト</td><td class="tt-tw">px-3 py-2</td><td class="tt-css">var(--space-3) / var(--space-2)</td><td class="tt-css">12px / 8px</td></tr>
+        <tr><td class="tt-purpose">カード・パネル内部</td><td class="tt-tw">p-4 / p-6</td><td class="tt-css">var(--space-4) / var(--space-6)</td><td class="tt-css">16px / 24px</td></tr>
+        <tr><td class="tt-purpose">ページ外枠（モバイル）</td><td class="tt-tw">px-4</td><td class="tt-css">var(--space-4)</td><td class="tt-css">16px</td></tr>
+        <tr><td class="tt-purpose">ページ外枠（デスクトップ）</td><td class="tt-tw">px-10</td><td class="tt-css">var(--space-10)</td><td class="tt-css">40px</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Margin（外側の余白）</h3>
+    <table class="token-table">
+      <thead>
+        <tr><th>用途</th><th>Tailwind クラス</th><th>CSS 変数</th><th>値</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="tt-purpose">ラベル → 入力欄</td><td class="tt-tw">mb-1</td><td class="tt-css">var(--space-1)</td><td class="tt-css">4px</td></tr>
+        <tr><td class="tt-purpose">フォームフィールド間</td><td class="tt-tw">mb-4</td><td class="tt-css">var(--space-4)</td><td class="tt-css">16px</td></tr>
+        <tr><td class="tt-purpose">小見出し → 本文</td><td class="tt-tw">mb-2</td><td class="tt-css">var(--space-2)</td><td class="tt-css">8px</td></tr>
+        <tr><td class="tt-purpose">セクション見出し → 内容</td><td class="tt-tw">mb-6</td><td class="tt-css">var(--space-6)</td><td class="tt-css">24px</td></tr>
+        <tr><td class="tt-purpose">セクション間</td><td class="tt-tw">mb-12 / mb-16</td><td class="tt-css">var(--space-12) / var(--space-16)</td><td class="tt-css">48px / 64px</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Gap（Flex / Grid の隙間）</h3>
+    <table class="token-table">
+      <thead>
+        <tr><th>用途</th><th>Tailwind クラス</th><th>CSS 変数</th><th>値</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="tt-purpose">アイコン ＋ テキスト</td><td class="tt-tw">gap-1.5</td><td class="tt-css">var(--space-1-5)</td><td class="tt-css">6px</td></tr>
+        <tr><td class="tt-purpose">インラインチップ・タグ列</td><td class="tt-tw">gap-2</td><td class="tt-css">var(--space-2)</td><td class="tt-css">8px</td></tr>
+        <tr><td class="tt-purpose">カード列・ボタン列</td><td class="tt-tw">gap-3 / gap-4</td><td class="tt-css">var(--space-3) / var(--space-4)</td><td class="tt-css">12px / 16px</td></tr>
+        <tr><td class="tt-purpose">カードグリッド</td><td class="tt-tw">gap-6</td><td class="tt-css">var(--space-6)</td><td class="tt-css">24px</td></tr>
+        <tr><td class="tt-purpose">ページレイアウト列</td><td class="tt-tw">gap-8 / gap-12</td><td class="tt-css">var(--space-8) / var(--space-12)</td><td class="tt-css">32px / 48px</td></tr>
+      </tbody>
+    </table>
+    <table class="space-table">
+      <tr><td class="space-key">1</td><td class="space-val">4px</td><td class="space-bar-wrap"><div class="space-bar" style="width:var(--space-1)"></div></td></tr>
+      <tr><td class="space-key">2</td><td class="space-val">8px</td><td class="space-bar-wrap"><div class="space-bar" style="width:var(--space-2)"></div></td></tr>
+      <tr><td class="space-key">3</td><td class="space-val">12px</td><td class="space-bar-wrap"><div class="space-bar" style="width:var(--space-3)"></div></td></tr>
+      <tr><td class="space-key">4</td><td class="space-val">16px</td><td class="space-bar-wrap"><div class="space-bar" style="width:var(--space-4)"></div></td></tr>
+      <tr><td class="space-key">5</td><td class="space-val">20px</td><td class="space-bar-wrap"><div class="space-bar" style="width:var(--space-5)"></div></td></tr>
+      <tr><td class="space-key">6</td><td class="space-val">24px</td><td class="space-bar-wrap"><div class="space-bar" style="width:var(--space-6)"></div></td></tr>
+      <tr><td class="space-key">8</td><td class="space-val">32px</td><td class="space-bar-wrap"><div class="space-bar" style="width:var(--space-8)"></div></td></tr>
+      <tr><td class="space-key">10</td><td class="space-val">40px</td><td class="space-bar-wrap"><div class="space-bar" style="width:var(--space-10)"></div></td></tr>
+      <tr><td class="space-key">12</td><td class="space-val">48px</td><td class="space-bar-wrap"><div class="space-bar" style="width:var(--space-12)"></div></td></tr>
+      <tr><td class="space-key">16</td><td class="space-val">64px</td><td class="space-bar-wrap"><div class="space-bar" style="width:var(--space-16)"></div></td></tr>
+      <tr><td class="space-key">20</td><td class="space-val">80px</td><td class="space-bar-wrap"><div class="space-bar" style="width:var(--space-20)"></div></td></tr>
+      <tr><td class="space-key">24</td><td class="space-val">96px</td><td class="space-bar-wrap"><div class="space-bar" style="width:var(--space-24)"></div></td></tr>
+    </table>
+  </section>
+</main>
+
+<script type="module" src="_layout.js"></script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar-mount"></aside>
+
+<main class="main">
+  <div class="home-hero">
+    <h1>Design System</h1>
+    <p>個人開発プロジェクト共通のデザイントークン。色・タイポグラフィ・スペーシング等を一元管理する。</p>
+    <div class="home-meta">
+      <span class="home-badge">v0.1.0</span>
+      <span class="home-badge">Style Dictionary v4</span>
+      <span class="home-badge">Tailwind CSS</span>
+    </div>
+  </div>
+
+  <section>
+    <h2>Foundations</h2>
+    <div class="card-grid">
+
+      <a class="card" href="colors.html">
+        <div class="card-preview">
+          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">
+            <span style="width:28px;height:28px;border-radius:var(--radius-md);background:var(--color-neutral-100)"></span>
+            <span style="width:28px;height:28px;border-radius:var(--radius-md);background:var(--color-neutral-400)"></span>
+            <span style="width:28px;height:28px;border-radius:var(--radius-md);background:var(--color-neutral-900)"></span>
+            <span style="width:28px;height:28px;border-radius:var(--radius-md);background:var(--accent)"></span>
+            <span style="width:28px;height:28px;border-radius:var(--radius-md);background:var(--status-success)"></span>
+            <span style="width:28px;height:28px;border-radius:var(--radius-md);background:var(--status-error)"></span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Colors</div>
+          <div class="card-desc">プリミティブ・セマンティックカラートークン</div>
+        </div>
+      </a>
+
+      <a class="card" href="typography.html">
+        <div class="card-preview" style="flex-direction:column;align-items:flex-start;gap:4px;padding:var(--space-5)">
+          <div style="font-size:var(--font-size-xl);font-weight:var(--font-weight-bold);color:var(--text-primary);line-height:1">Aa</div>
+          <div style="font-size:var(--font-size-sm);color:var(--text-secondary)">System Font</div>
+          <div style="font-family:var(--font-family-mono);font-size:var(--font-size-xs);color:var(--text-muted)">Mono</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Typography</div>
+          <div class="card-desc">フォント・サイズ・ウェイト・行間</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Layout</h2>
+    <div class="card-grid">
+
+      <a class="card" href="spacing.html">
+        <div class="card-preview" style="flex-direction:column;gap:6px;align-items:flex-start;padding:var(--space-5)">
+          <div style="height:6px;border-radius:var(--radius-sm);background:var(--accent);opacity:0.6;width:var(--space-2)"></div>
+          <div style="height:6px;border-radius:var(--radius-sm);background:var(--accent);opacity:0.6;width:var(--space-4)"></div>
+          <div style="height:6px;border-radius:var(--radius-sm);background:var(--accent);opacity:0.6;width:var(--space-8)"></div>
+          <div style="height:6px;border-radius:var(--radius-sm);background:var(--accent);opacity:0.6;width:var(--space-16)"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Spacing</div>
+          <div class="card-desc">4px ベーススペーシングスケール</div>
+        </div>
+      </a>
+
+      <a class="card" href="radius.html">
+        <div class="card-preview" style="gap:10px">
+          <div style="width:36px;height:36px;background:var(--accent-subtle);border:2px solid var(--accent);border-radius:var(--radius-md)"></div>
+          <div style="width:36px;height:36px;background:var(--accent-subtle);border:2px solid var(--accent);border-radius:var(--radius-xl)"></div>
+          <div style="width:36px;height:36px;background:var(--accent-subtle);border:2px solid var(--accent);border-radius:var(--radius-full)"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Border Radius</div>
+          <div class="card-desc">コンポーネント別の角丸スケール</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Effects</h2>
+    <div class="card-grid">
+
+      <a class="card" href="shadow.html">
+        <div class="card-preview" style="gap:var(--space-4)">
+          <div style="width:48px;height:36px;background:var(--surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)"></div>
+          <div style="width:48px;height:36px;background:var(--surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-md)"></div>
+          <div style="width:48px;height:36px;background:var(--surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-xl)"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Shadow</div>
+          <div class="card-desc">エレベーション・影のスケール</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Components</h2>
+    <div class="card-grid">
+
+      <a class="card" href="components.html">
+        <div class="card-preview" style="gap:var(--space-2);flex-wrap:wrap;align-items:center">
+          <span style="display:inline-flex;align-items:center;padding:4px 12px;background:var(--accent);color:var(--text-inverse);font-size:12px;font-weight:500;border-radius:var(--radius-md)">Button</span>
+          <span style="display:inline-flex;align-items:center;padding:2px 8px;background:var(--status-success-subtle);color:var(--status-success);font-size:11px;font-weight:500;border-radius:var(--radius-full)">Badge</span>
+          <span style="display:inline-block;width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%"></span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Actions</div>
+          <div class="card-desc">Button · Badge · Spinner · Tooltip</div>
+        </div>
+      </a>
+
+      <a class="card" href="components-forms.html">
+        <div class="card-preview" style="flex-direction:column;gap:var(--space-2);align-items:flex-start;padding:var(--space-4)">
+          <div style="display:flex;flex-direction:column;gap:4px;width:100%">
+            <div style="height:6px;width:40%;background:var(--text-muted);border-radius:2px;opacity:0.5"></div>
+            <div style="height:20px;background:var(--bg-base);border:1px solid var(--border);border-radius:var(--radius-md)"></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <div style="width:14px;height:14px;border:1.5px solid var(--accent);border-radius:3px;background:var(--accent);flex-shrink:0"></div>
+            <div style="height:6px;width:60px;background:var(--text-muted);border-radius:2px;opacity:0.5"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Forms</div>
+          <div class="card-desc">Input · Textarea · Select · Checkbox · Toggle</div>
+        </div>
+      </a>
+
+      <a class="card" href="components-layout.html">
+        <div class="card-preview" style="gap:var(--space-2);flex-wrap:wrap;align-items:center">
+          <div style="width:64px;height:44px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)"></div>
+          <div style="display:flex;flex-direction:column;gap:3px">
+            <div style="height:4px;background:var(--border);border-radius:2px;width:80px"></div>
+            <div style="height:4px;background:var(--border);border-radius:2px;width:60px"></div>
+            <div style="height:4px;background:var(--border);border-radius:2px;width:70px"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Layout &amp; Content</div>
+          <div class="card-desc">Card · Alert · Table · Tabs · Avatar · Divider</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>セットアップ</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);line-height:var(--line-height-relaxed);margin-bottom:var(--space-6)">
+      このデザインシステムはローカルで動かすビルドツール。トークンを編集してビルドすると <code>css/variables.css</code> が生成される。その CSS ファイルをプロジェクトにコピーして使う。サーバー公開は不要。
+    </p>
+
+    <div class="step-list">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">ビルドして CSS を生成する</div>
+          <div class="step-note">トークンを変更するたびに実行する。<code>css/variables.css</code> が更新される。</div>
+          <pre class="code"><span class="c"># design-system ディレクトリで実行</span>
+bun run build</pre>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">生成した CSS をプロジェクトにコピーする</div>
+          <div class="step-note">プロジェクトの <code>src/styles/</code> など適切な場所にコピーする。ファイル名は任意。</div>
+          <pre class="code"><span class="c"># cp でコピー（1回ごとに手動でもよい）</span>
+cp css/variables.css ../my-project/src/styles/design-tokens.css
+
+<span class="c"># または watch + cp でトークン変更を自動反映することもできる</span></pre>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">プロジェクトで読み込む</div>
+
+          <div class="tab-group" id="setup-tabs">
+            <div class="tab-bar">
+              <button class="tab-btn active" onclick="switchTab('setup-tabs','css')">CSS / Vanilla JS</button>
+              <button class="tab-btn" onclick="switchTab('setup-tabs','tw')">Tailwind</button>
+            </div>
+            <div class="tab-pane active" id="setup-tabs-css">
+              <pre class="code"><span class="c">/* globals.css などの先頭で import */</span>
+@import <span class="s">'./design-tokens.css'</span>;
+
+<span class="c">/* または HTML の &lt;head&gt; に &lt;link&gt; */</span>
+&lt;link rel=<span class="s">"stylesheet"</span> href=<span class="s">"./src/styles/design-tokens.css"</span>&gt;</pre>
+              <div class="step-note">以降は <code>var(--accent)</code> <code>var(--text-primary)</code> 等を直接使う。</div>
+            </div>
+            <div class="tab-pane" id="setup-tabs-tw">
+              <pre class="code"><span class="c">/* globals.css などで CSS を読み込む */</span>
+@import <span class="s">'./design-tokens.css'</span>;</pre>
+              <pre class="code"><span class="c">// tailwind.config.js — design-system の Tailwind 設定をコピーして使うか、</span>
+<span class="c">// design-system が同じ場所にある場合はパス参照でもよい</span>
+<span class="k">const</span> base = require(<span class="s">'../design-system/tailwind/tailwind.config'</span>)
+module.exports = {
+  ...base,
+  content: [<span class="s">'./src/**/*.{html,js,jsx,ts,tsx}'</span>],
+}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">トークンを使って実装する</div>
+          <div class="step-note">ボタンを例に:</div>
+
+          <div class="tab-group" id="example-tabs">
+            <div class="tab-bar">
+              <button class="tab-btn active" onclick="switchTab('example-tabs','css')">CSS</button>
+              <button class="tab-btn" onclick="switchTab('example-tabs','tw')">Tailwind</button>
+            </div>
+            <div class="tab-pane active" id="example-tabs-css">
+              <pre class="code">.button {
+  background:    <span class="k">var(--accent)</span>;
+  color:         <span class="k">var(--text-inverse)</span>;
+  border-radius: <span class="k">var(--radius-md)</span>;
+  padding:       <span class="k">var(--space-2) var(--space-4)</span>;
+  font-size:     <span class="k">var(--font-size-sm)</span>;
+  font-weight:   <span class="k">var(--font-weight-medium)</span>;
+}
+.button:hover { background: <span class="k">var(--accent-hover)</span>; }</pre>
+            </div>
+            <div class="tab-pane" id="example-tabs-tw">
+              <pre class="code">&lt;button class=<span class="s">"bg-accent text-foreground-inverse rounded-md
+         px-4 py-2 text-sm font-medium hover:bg-accent-hover"</span>&gt;
+  送信
+&lt;/button&gt;</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script>
+function switchTab(groupId, key) {
+  const group = document.getElementById(groupId);
+  group.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    const pane = group.querySelectorAll('.tab-pane')[i];
+    const active = btn.textContent.toLowerCase().startsWith(key) || btn.getAttribute('onclick').includes("'"+key+"'");
+    btn.classList.toggle('active', active);
+    pane.classList.toggle('active', active);
+  });
+}
+</script>
+<script type="module" src="_layout.js"></script>
+</body>
+</html>

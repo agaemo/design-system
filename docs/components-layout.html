@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout & Content — Components — Design System</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="components.css">
+  <style>
+    .comp-preview {
+      background: var(--bg-base);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: var(--space-6);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+    .comp-preview + pre.code {
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      margin-top: 0;
+      border-top: none;
+    }
+    .comp-preview.col  { flex-direction: column; }
+    .comp-preview.fill { display: block; padding: 0; overflow: hidden; }
+    .comp-section { margin-bottom: var(--space-12); }
+    .comp-section h3 { margin: var(--space-8) 0 var(--space-2); font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+    .comp-note { font-size: var(--font-size-xs); color: var(--text-muted); margin: var(--space-2) 0 var(--space-4); }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar-mount"></aside>
+
+<main class="main">
+  <h1>Layout &amp; Content</h1>
+  <p style="font-size:var(--font-size-sm);color:var(--text-secondary);line-height:var(--line-height-relaxed);margin-bottom:var(--space-2)">
+    Card / Alert / Table / Tabs / Avatar / Divider。画面の構造やコンテンツ表示に使うコンポーネント。
+  </p>
+  <p style="font-size:var(--font-size-xs);color:var(--text-muted);margin-bottom:var(--space-8)">React では <code>class</code> → <code>className</code> に読み替える。</p>
+
+  <!-- ===== Card ===== -->
+  <section id="card" class="comp-section">
+    <h2>Card</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      関連するコンテンツをまとめるコンテナ。ヘッダー・フッターは省略できる。
+    </p>
+
+    <h3>ヘッダー・ボディ・フッター</h3>
+    <div class="comp-preview">
+      <div class="card" style="width:300px">
+        <div class="card-header">
+          <p class="card-title">プロジェクト設定</p>
+          <p class="card-subtitle">基本情報を変更します</p>
+        </div>
+        <div class="card-body" style="font-size:var(--font-size-sm);color:var(--text-secondary)">
+          プロジェクト名・説明・公開設定などを編集できます。
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary btn-sm">保存</button>
+          <button class="btn btn-ghost btn-sm">キャンセル</button>
+        </div>
+      </div>
+    </div>
+    <pre class="code">&lt;div class=<span class="s">"card"</span>&gt;
+  &lt;div class=<span class="s">"card-header"</span>&gt;
+    &lt;p class=<span class="s">"card-title"</span>&gt;プロジェクト設定&lt;/p&gt;
+    &lt;p class=<span class="s">"card-subtitle"</span>&gt;基本情報を変更します&lt;/p&gt;  <span class="c">&lt;!-- 省略可 --&gt;</span>
+  &lt;/div&gt;
+  &lt;div class=<span class="s">"card-body"</span>&gt;
+    コンテンツ
+  &lt;/div&gt;
+  &lt;div class=<span class="s">"card-footer"</span>&gt;  <span class="c">&lt;!-- 省略可 --&gt;</span>
+    &lt;button class=<span class="s">"btn btn-primary btn-sm"</span>&gt;保存&lt;/button&gt;
+    &lt;button class=<span class="s">"btn btn-ghost btn-sm"</span>&gt;キャンセル&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+    <h3>ボディのみ（シンプル）</h3>
+    <div class="comp-preview">
+      <div class="card" style="width:240px">
+        <div class="card-body" style="font-size:var(--font-size-sm);color:var(--text-secondary)">
+          ヘッダー・フッターなしのシンプルなカード。
+        </div>
+      </div>
+    </div>
+    <pre class="code">&lt;div class=<span class="s">"card"</span>&gt;
+  &lt;div class=<span class="s">"card-body"</span>&gt;
+    コンテンツ
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+  </section>
+
+  <!-- ===== Alert ===== -->
+  <section id="alert" class="comp-section">
+    <h2>Alert</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      ユーザーへの通知・フィードバック。処理結果・警告・エラーなど重要度に応じたバリアントを選ぶ。
+    </p>
+
+    <h3>Success</h3>
+    <div class="comp-preview col">
+      <div class="alert alert-success" style="width:100%">
+        <span class="alert-icon">✓</span>
+        <div class="alert-body">
+          <div class="alert-title">保存しました</div>
+          <div>変更が正常に保存されました。</div>
+        </div>
+      </div>
+    </div>
+    <pre class="code">&lt;div class=<span class="s">"alert alert-success"</span>&gt;
+  &lt;span class=<span class="s">"alert-icon"</span>&gt;✓&lt;/span&gt;
+  &lt;div class=<span class="s">"alert-body"</span>&gt;
+    &lt;div class=<span class="s">"alert-title"</span>&gt;保存しました&lt;/div&gt;  <span class="c">&lt;!-- タイトルは省略可 --&gt;</span>
+    &lt;div&gt;変更が正常に保存されました。&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+    <h3>Warning / Error / Info</h3>
+    <div class="comp-preview col">
+      <div class="alert alert-warning" style="width:100%">
+        <span class="alert-icon">⚠</span>
+        <div class="alert-body">この操作は元に戻せません。</div>
+      </div>
+      <div class="alert alert-error" style="width:100%">
+        <span class="alert-icon">✕</span>
+        <div class="alert-body">メールアドレスが無効です。</div>
+      </div>
+      <div class="alert alert-info" style="width:100%">
+        <span class="alert-icon">ℹ</span>
+        <div class="alert-body">システムメンテナンスを予定しています。</div>
+      </div>
+    </div>
+    <pre class="code">&lt;div class=<span class="s">"alert alert-warning"</span>&gt;
+  &lt;span class=<span class="s">"alert-icon"</span>&gt;⚠&lt;/span&gt;
+  &lt;div class=<span class="s">"alert-body"</span>&gt;この操作は元に戻せません。&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=<span class="s">"alert alert-error"</span>&gt;
+  &lt;span class=<span class="s">"alert-icon"</span>&gt;✕&lt;/span&gt;
+  &lt;div class=<span class="s">"alert-body"</span>&gt;メールアドレスが無効です。&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=<span class="s">"alert alert-info"</span>&gt;
+  &lt;span class=<span class="s">"alert-icon"</span>&gt;ℹ&lt;/span&gt;
+  &lt;div class=<span class="s">"alert-body"</span>&gt;システムメンテナンスを予定しています。&lt;/div&gt;
+&lt;/div&gt;</pre>
+  </section>
+
+  <!-- ===== Table ===== -->
+  <section id="table" class="comp-section">
+    <h2>Table</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      構造化されたデータを行・列で表示する。Badge と組み合わせてステータスを表現できる。
+    </p>
+
+    <h3>基本</h3>
+    <div class="comp-preview fill">
+      <table class="ds-table">
+        <thead>
+          <tr>
+            <th>名前</th>
+            <th>ステータス</th>
+            <th>役割</th>
+            <th>最終ログイン</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>山田 太郎</td>
+            <td><span class="badge badge-success">アクティブ</span></td>
+            <td>管理者</td>
+            <td style="color:var(--text-secondary)">2 分前</td>
+          </tr>
+          <tr>
+            <td>佐藤 花子</td>
+            <td><span class="badge badge-neutral">招待済み</span></td>
+            <td>編集者</td>
+            <td style="color:var(--text-secondary)">—</td>
+          </tr>
+          <tr>
+            <td>田中 一郎</td>
+            <td><span class="badge badge-error">無効</span></td>
+            <td>閲覧者</td>
+            <td style="color:var(--text-secondary)">30 日前</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <pre class="code">&lt;table class=<span class="s">"ds-table"</span>&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;名前&lt;/th&gt;
+      &lt;th&gt;ステータス&lt;/th&gt;
+      &lt;th&gt;役割&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;山田 太郎&lt;/td&gt;
+      &lt;td&gt;&lt;span class=<span class="s">"badge badge-success"</span>&gt;アクティブ&lt;/span&gt;&lt;/td&gt;
+      &lt;td&gt;管理者&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</pre>
+
+    <h3 style="margin-top:var(--space-6)">ソート</h3>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      <code>ds-table__sort</code> を <code>th</code> に付与。<code>--asc</code> / <code>--desc</code> でソート方向を示す。ヘッダーをクリックして確認できます。
+    </p>
+    <div class="comp-preview fill">
+      <table class="ds-table">
+        <thead>
+          <tr>
+            <th class="ds-table__sort" onclick="cycleSort(this)">名前</th>
+            <th class="ds-table__sort" onclick="cycleSort(this)">役割</th>
+            <th class="ds-table__sort" onclick="cycleSort(this)">最終ログイン</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>山田 太郎</td><td>管理者</td><td>2 分前</td></tr>
+          <tr><td>佐藤 花子</td><td>編集者</td><td>—</td></tr>
+          <tr><td>田中 一郎</td><td>閲覧者</td><td>30 日前</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <pre class="code">&lt;!-- th に ds-table__sort を付与。JS で --asc / --desc を切り替える --&gt;
+&lt;th class=<span class="s">"ds-table__sort"</span>&gt;名前&lt;/th&gt;
+&lt;th class=<span class="s">"ds-table__sort ds-table__sort--asc"</span>&gt;最終ログイン&lt;/th&gt;</pre>
+
+    <h3 style="margin-top:var(--space-6)">チェックボックス + 一括操作</h3>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      先頭列にチェックボックスを追加。複数行選択時にバルクアクションバーを表示する。行を選択して確認できます。
+    </p>
+    <div class="comp-preview fill">
+      <div class="ds-table-toolbar" id="bulk-toolbar" hidden>
+        <span class="ds-table-toolbar__count" id="bulk-count"></span>
+        <div style="display:flex;gap:var(--space-2)">
+          <button class="btn btn-sm btn-outline">エクスポート</button>
+          <button class="btn btn-sm btn-danger">削除</button>
+        </div>
+      </div>
+      <table class="ds-table">
+        <thead>
+          <tr>
+            <th class="ds-table__check"><input type="checkbox" id="check-all" onchange="toggleAllRows(this)"></th>
+            <th>名前</th>
+            <th>ステータス</th>
+            <th>役割</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ds-table__check"><input type="checkbox" class="row-check" onchange="updateBulkToolbar()"></td>
+            <td>山田 太郎</td>
+            <td><span class="badge badge-success">アクティブ</span></td>
+            <td>管理者</td>
+          </tr>
+          <tr>
+            <td class="ds-table__check"><input type="checkbox" class="row-check" onchange="updateBulkToolbar()"></td>
+            <td>佐藤 花子</td>
+            <td><span class="badge badge-neutral">招待済み</span></td>
+            <td>編集者</td>
+          </tr>
+          <tr>
+            <td class="ds-table__check"><input type="checkbox" class="row-check" onchange="updateBulkToolbar()"></td>
+            <td>田中 一郎</td>
+            <td><span class="badge badge-error">無効</span></td>
+            <td>閲覧者</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <pre class="code">&lt;div class=<span class="s">"ds-table-toolbar"</span> hidden&gt;
+  &lt;span class=<span class="s">"ds-table-toolbar__count"</span>&gt;3件選択中&lt;/span&gt;
+  &lt;button class=<span class="s">"btn btn-sm btn-outline"</span>&gt;エクスポート&lt;/button&gt;
+  &lt;button class=<span class="s">"btn btn-sm btn-danger"</span>&gt;削除&lt;/button&gt;
+&lt;/div&gt;
+&lt;table class=<span class="s">"ds-table"</span>&gt;
+  &lt;thead&gt;&lt;tr&gt;
+    &lt;th class=<span class="s">"ds-table__check"</span>&gt;&lt;input type=<span class="s">"checkbox"</span> id=<span class="s">"check-all"</span>&gt;&lt;/th&gt;
+    &lt;th&gt;名前&lt;/th&gt;
+  &lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;&lt;tr&gt;
+    &lt;td class=<span class="s">"ds-table__check"</span>&gt;&lt;input type=<span class="s">"checkbox"</span> class=<span class="s">"row-check"</span>&gt;&lt;/td&gt;
+    &lt;td&gt;山田 太郎&lt;/td&gt;
+  &lt;/tr&gt;&lt;/tbody&gt;
+&lt;/table&gt;</pre>
+  </section>
+
+  <!-- ===== Tabs ===== -->
+  <section id="tabs" class="comp-section">
+    <h2>Tabs</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      同一画面内の関連コンテンツをグループ分けする。ページ遷移ではなくコンテンツ切り替えに使う。
+    </p>
+
+    <h3>基本（クリックで切り替わります）</h3>
+    <div class="comp-preview fill" style="padding:0">
+      <div style="padding:var(--space-4) var(--space-5) 0">
+        <div class="tab-list-ui" id="demo-tabs">
+          <button class="tab-item-ui active" onclick="switchDemoTab(0)">概要</button>
+          <button class="tab-item-ui"        onclick="switchDemoTab(1)">設定</button>
+          <button class="tab-item-ui"        onclick="switchDemoTab(2)">履歴</button>
+        </div>
+      </div>
+      <div style="padding:var(--space-4) var(--space-5);font-size:var(--font-size-sm);color:var(--text-secondary)">
+        <div id="demo-panel-0">概要のコンテンツがここに入ります。</div>
+        <div id="demo-panel-1" hidden>設定のコンテンツがここに入ります。</div>
+        <div id="demo-panel-2" hidden>履歴のコンテンツがここに入ります。</div>
+      </div>
+    </div>
+    <pre class="code"><span class="c">&lt;!-- アクティブなタブに .active を付ける --&gt;</span>
+&lt;div class=<span class="s">"tab-list-ui"</span>&gt;
+  &lt;button class=<span class="s">"tab-item-ui active"</span>&gt;概要&lt;/button&gt;
+  &lt;button class=<span class="s">"tab-item-ui"</span>&gt;設定&lt;/button&gt;
+  &lt;button class=<span class="s">"tab-item-ui"</span>&gt;履歴&lt;/button&gt;
+&lt;/div&gt;
+
+<span class="c">&lt;!-- パネルは hidden 属性で表示/非表示を切り替える --&gt;</span>
+&lt;div id=<span class="s">"panel-overview"</span>&gt;概要のコンテンツ&lt;/div&gt;
+&lt;div id=<span class="s">"panel-settings"</span> hidden&gt;設定のコンテンツ&lt;/div&gt;
+&lt;div id=<span class="s">"panel-history"</span>  hidden&gt;履歴のコンテンツ&lt;/div&gt;
+
+<span class="c">&lt;!-- React での実装例 --&gt;</span>
+<span class="c">// const [tab, setTab] = useState('overview')</span>
+<span class="c">// &lt;button className={`tab-item-ui ${tab === 'overview' ? 'active' : ''}`}</span>
+<span class="c">//         onClick={() =&gt; setTab('overview')}&gt;概要&lt;/button&gt;</span></pre>
+  </section>
+
+  <!-- ===== Avatar ===== -->
+  <section id="avatar" class="comp-section">
+    <h2>Avatar</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      ユーザーや組織を表す。画像がない場合はイニシャルで代替する。
+    </p>
+
+    <h3>サイズ（イニシャル）</h3>
+    <div class="comp-preview" style="align-items:center">
+      <div class="avatar avatar-sm">AB</div>
+      <div class="avatar avatar-md">CD</div>
+      <div class="avatar avatar-lg">EF</div>
+      <div class="avatar avatar-xl">GH</div>
+    </div>
+    <pre class="code"><span class="c">&lt;!-- avatar-sm (28px) / avatar-md (36px) / avatar-lg (48px) / avatar-xl (64px) --&gt;</span>
+&lt;div class=<span class="s">"avatar avatar-sm"</span>&gt;AB&lt;/div&gt;
+&lt;div class=<span class="s">"avatar avatar-md"</span>&gt;AB&lt;/div&gt;
+&lt;div class=<span class="s">"avatar avatar-lg"</span>&gt;AB&lt;/div&gt;
+
+<span class="c">&lt;!-- 画像がある場合 --&gt;</span>
+&lt;div class=<span class="s">"avatar avatar-md"</span>&gt;
+  &lt;img src=<span class="s">"/path/to/photo.jpg"</span> alt=<span class="s">"山田 太郎"</span>&gt;
+&lt;/div&gt;</pre>
+
+    <h3>ユーザー情報と並べる</h3>
+    <div class="comp-preview" style="align-items:center">
+      <div style="display:flex;align-items:center;gap:var(--space-3)">
+        <div class="avatar avatar-md">YT</div>
+        <div>
+          <div style="font-size:var(--font-size-sm);font-weight:var(--font-weight-medium);color:var(--text-primary)">山田 太郎</div>
+          <div style="font-size:var(--font-size-xs);color:var(--text-secondary)">yamada@example.com</div>
+        </div>
+      </div>
+    </div>
+    <pre class="code"><span class="c">&lt;!-- フレックスレイアウトで名前・メールと並べる --&gt;</span>
+&lt;div class=<span class="s">"user-row"</span>&gt;  <span class="c">&lt;!-- display:flex; align-items:center; gap:12px --&gt;</span>
+  &lt;div class=<span class="s">"avatar avatar-md"</span>&gt;YT&lt;/div&gt;
+  &lt;div&gt;
+    &lt;div class=<span class="s">"user-name"</span>&gt;山田 太郎&lt;/div&gt;
+    &lt;div class=<span class="s">"user-email"</span>&gt;yamada@example.com&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+    <h3>Avatar Group</h3>
+    <div class="comp-preview" style="align-items:center">
+      <div class="avatar-group">
+        <div class="avatar avatar-sm">AB</div>
+        <div class="avatar avatar-sm">CD</div>
+        <div class="avatar avatar-sm">EF</div>
+        <div class="avatar avatar-sm" style="background:var(--surface-subtle);color:var(--text-secondary);font-size:10px">+5</div>
+      </div>
+    </div>
+    <pre class="code">&lt;div class=<span class="s">"avatar-group"</span>&gt;
+  &lt;div class=<span class="s">"avatar avatar-sm"</span>&gt;AB&lt;/div&gt;
+  &lt;div class=<span class="s">"avatar avatar-sm"</span>&gt;CD&lt;/div&gt;
+  &lt;div class=<span class="s">"avatar avatar-sm"</span>&gt;EF&lt;/div&gt;
+  <span class="c">&lt;!-- 余りは背景色を変えて数字で表示 --&gt;</span>
+  &lt;div class=<span class="s">"avatar avatar-sm"</span>
+       style=<span class="s">"background:var(--surface-subtle);color:var(--text-secondary);font-size:10px"</span>&gt;+5&lt;/div&gt;
+&lt;/div&gt;</pre>
+  </section>
+
+  <!-- ===== Modal ===== -->
+  <section id="modal" class="comp-section">
+    <h2>Modal</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      ボタン実行後などに表示するダイアログ。情報・警告・確認（破壊的操作）の3バリアント。<br>
+      <code>.modal-backdrop</code> をクリックすると閉じる。<strong>スクロールロック・フォーカストラップは実装側で対応する。</strong>
+    </p>
+
+    <h3>フォーム入力（作成・編集）</h3>
+    <div class="comp-preview">
+      <button class="btn btn-primary" onclick="document.getElementById('modal-form').removeAttribute('hidden')">
+        プロジェクトを作成
+      </button>
+    </div>
+    <pre class="code">&lt;button class=<span class="s">"btn btn-primary"</span> onclick=<span class="s">"openModal('modal-form')"</span>&gt;プロジェクトを作成&lt;/button&gt;
+
+&lt;div class=<span class="s">"modal-backdrop"</span> id=<span class="s">"modal-form"</span> hidden
+     onclick=<span class="s">"if(event.target===this)closeModal('modal-form')"</span>&gt;
+  &lt;div class=<span class="s">"modal"</span>&gt;
+    &lt;div class=<span class="s">"modal-header"</span>&gt;
+      &lt;span class=<span class="s">"modal-title"</span>&gt;プロジェクトを作成&lt;/span&gt;
+      &lt;button class=<span class="s">"modal-close"</span> onclick=<span class="s">"closeModal('modal-form')"</span>&gt;✕&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class=<span class="s">"modal-body"</span> style=<span class="s">"display:flex;flex-direction:column;gap:16px"</span>&gt;
+      &lt;div class=<span class="s">"form-group"</span>&gt;
+        &lt;label class=<span class="s">"form-label"</span> for=<span class="s">"name"</span>&gt;プロジェクト名&lt;span class=<span class="s">"form-required"</span>&gt;*&lt;/span&gt;&lt;/label&gt;
+        &lt;input class=<span class="s">"form-input"</span> id=<span class="s">"name"</span> type=<span class="s">"text"</span> placeholder=<span class="s">"例: マーケティングサイト"</span>&gt;
+      &lt;/div&gt;
+      &lt;div class=<span class="s">"form-group"</span>&gt;
+        &lt;label class=<span class="s">"form-label"</span> for=<span class="s">"type"</span>&gt;種別&lt;/label&gt;
+        &lt;select class=<span class="s">"form-select"</span> id=<span class="s">"type"</span>&gt;
+          &lt;option value=<span class="s">""</span>&gt;選択してください&lt;/option&gt;
+          &lt;option value=<span class="s">"web"</span>&gt;Webアプリ&lt;/option&gt;
+          &lt;option value=<span class="s">"mobile"</span>&gt;モバイルアプリ&lt;/option&gt;
+          &lt;option value=<span class="s">"other"</span>&gt;その他&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+      &lt;div class=<span class="s">"form-group"</span>&gt;
+        &lt;label class=<span class="s">"form-label"</span> for=<span class="s">"desc"</span>&gt;説明&lt;/label&gt;
+        &lt;textarea class=<span class="s">"form-textarea"</span> id=<span class="s">"desc"</span> placeholder=<span class="s">"プロジェクトの概要を入力..."</span>&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=<span class="s">"modal-footer"</span>&gt;
+      &lt;button class=<span class="s">"btn btn-ghost"</span> onclick=<span class="s">"closeModal('modal-form')"</span>&gt;キャンセル&lt;/button&gt;
+      &lt;button class=<span class="s">"btn btn-primary"</span>&gt;作成する&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+    <p class="comp-note"><code>modal-body</code> に <code>flex-direction:column;gap:16px</code> を指定してフォーム要素を縦並びにする。ネイティブ <code>&lt;select&gt;</code> はブラウザが枠外に描画するので overflow-y との競合なし。</p>
+
+    <h3>情報（Info）— 処理完了・お知らせ</h3>
+    <div class="comp-preview">
+      <button class="btn btn-primary" onclick="document.getElementById('modal-info').removeAttribute('hidden')">
+        情報モーダルを開く
+      </button>
+    </div>
+    <pre class="code"><span class="c">&lt;!-- トリガー --&gt;</span>
+&lt;button class=<span class="s">"btn btn-primary"</span> onclick=<span class="s">"openModal('modal-info')"</span>&gt;情報モーダルを開く&lt;/button&gt;
+
+<span class="c">&lt;!-- モーダル本体: hidden で非表示、backdrop クリックで閉じる --&gt;</span>
+&lt;div class=<span class="s">"modal-backdrop"</span> id=<span class="s">"modal-info"</span> hidden
+     onclick=<span class="s">"if(event.target===this)closeModal('modal-info')"</span>&gt;
+  &lt;div class=<span class="s">"modal"</span>&gt;
+    &lt;div class=<span class="s">"modal-header"</span>&gt;
+      &lt;span class=<span class="s">"modal-title"</span>&gt;送信が完了しました&lt;/span&gt;
+      &lt;button class=<span class="s">"modal-close"</span> onclick=<span class="s">"closeModal('modal-info')"</span>&gt;✕&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class=<span class="s">"modal-body"</span>&gt;
+      フォームの内容が正常に送信されました。確認メールをお送りしましたのでご確認ください。
+    &lt;/div&gt;
+    &lt;div class=<span class="s">"modal-footer"</span>&gt;
+      &lt;button class=<span class="s">"btn btn-primary"</span> onclick=<span class="s">"closeModal('modal-info')"</span>&gt;閉じる&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+    <h3>警告（Warning）— 続行前に確認が必要</h3>
+    <div class="comp-preview">
+      <button class="btn btn-outline" onclick="document.getElementById('modal-warning').removeAttribute('hidden')">
+        警告モーダルを開く
+      </button>
+    </div>
+    <pre class="code">&lt;button class=<span class="s">"btn btn-outline"</span> onclick=<span class="s">"openModal('modal-warning')"</span>&gt;警告モーダルを開く&lt;/button&gt;
+
+&lt;div class=<span class="s">"modal-backdrop"</span> id=<span class="s">"modal-warning"</span> hidden
+     onclick=<span class="s">"if(event.target===this)closeModal('modal-warning')"</span>&gt;
+  &lt;div class=<span class="s">"modal modal-warning"</span>&gt;  <span class="c">&lt;!-- .modal-warning で上部ボーダーが黄色 --&gt;</span>
+    &lt;div class=<span class="s">"modal-header"</span>&gt;
+      &lt;span class=<span class="s">"modal-title"</span>&gt;⚠ 変更が保存されていません&lt;/span&gt;
+      &lt;button class=<span class="s">"modal-close"</span> onclick=<span class="s">"closeModal('modal-warning')"</span>&gt;✕&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class=<span class="s">"modal-body"</span>&gt;
+      ページを離れると編集中の内容が失われます。このまま続行しますか？
+    &lt;/div&gt;
+    &lt;div class=<span class="s">"modal-footer"</span>&gt;
+      &lt;button class=<span class="s">"btn btn-ghost"</span> onclick=<span class="s">"closeModal('modal-warning')"</span>&gt;編集に戻る&lt;/button&gt;
+      &lt;button class=<span class="s">"btn btn-primary"</span>&gt;続行&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+    <h3>確認（Danger）— 取り消せない破壊的操作</h3>
+    <div class="comp-preview">
+      <button class="btn btn-danger" onclick="document.getElementById('modal-danger').removeAttribute('hidden')">
+        削除モーダルを開く
+      </button>
+    </div>
+    <pre class="code">&lt;button class=<span class="s">"btn btn-danger"</span> onclick=<span class="s">"openModal('modal-danger')"</span>&gt;削除する&lt;/button&gt;
+
+&lt;div class=<span class="s">"modal-backdrop"</span> id=<span class="s">"modal-danger"</span> hidden
+     onclick=<span class="s">"if(event.target===this)closeModal('modal-danger')"</span>&gt;
+  &lt;div class=<span class="s">"modal modal-sm modal-danger"</span>&gt;  <span class="c">&lt;!-- .modal-danger で上部ボーダーが赤 --&gt;</span>
+    &lt;div class=<span class="s">"modal-header"</span>&gt;
+      &lt;span class=<span class="s">"modal-title"</span>&gt;プロジェクトを削除しますか？&lt;/span&gt;
+      &lt;button class=<span class="s">"modal-close"</span> onclick=<span class="s">"closeModal('modal-danger')"</span>&gt;✕&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class=<span class="s">"modal-body"</span>&gt;
+      この操作は元に戻せません。プロジェクト内のすべてのデータが削除されます。
+    &lt;/div&gt;
+    &lt;div class=<span class="s">"modal-footer"</span>&gt;
+      &lt;button class=<span class="s">"btn btn-ghost"</span> onclick=<span class="s">"closeModal('modal-danger')"</span>&gt;キャンセル&lt;/button&gt;
+      &lt;button class=<span class="s">"btn btn-danger"</span>&gt;削除する&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+  </section>
+
+  <!-- モーダル本体（実際の DOM に配置） -->
+  <div class="modal-backdrop" id="modal-form" hidden
+       onclick="if(event.target===this)this.setAttribute('hidden','')">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">プロジェクトを作成</span>
+        <button class="modal-close" onclick="document.getElementById('modal-form').setAttribute('hidden','')">✕</button>
+      </div>
+      <div class="modal-body" style="display:flex;flex-direction:column;gap:var(--space-4)">
+        <div class="form-group">
+          <label class="form-label" for="mf-name">プロジェクト名<span class="form-required">*</span></label>
+          <input class="form-input" id="mf-name" type="text" placeholder="例: マーケティングサイト">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="mf-type">種別</label>
+          <select class="form-select" id="mf-type">
+            <option value="">選択してください</option>
+            <option value="web">Webアプリ</option>
+            <option value="mobile">モバイルアプリ</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="mf-desc">説明</label>
+          <textarea class="form-textarea" id="mf-desc" placeholder="プロジェクトの概要を入力..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="document.getElementById('modal-form').setAttribute('hidden','')">キャンセル</button>
+        <button class="btn btn-primary">作成する</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-info" hidden
+       onclick="if(event.target===this)this.setAttribute('hidden','')">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">送信が完了しました</span>
+        <button class="modal-close" onclick="document.getElementById('modal-info').setAttribute('hidden','')">✕</button>
+      </div>
+      <div class="modal-body">
+        フォームの内容が正常に送信されました。確認メールをお送りしましたのでご確認ください。
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="document.getElementById('modal-info').setAttribute('hidden','')">閉じる</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-warning" hidden
+       onclick="if(event.target===this)this.setAttribute('hidden','')">
+    <div class="modal modal-warning">
+      <div class="modal-header">
+        <span class="modal-title">⚠ 変更が保存されていません</span>
+        <button class="modal-close" onclick="document.getElementById('modal-warning').setAttribute('hidden','')">✕</button>
+      </div>
+      <div class="modal-body">
+        ページを離れると編集中の内容が失われます。このまま続行しますか？
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="document.getElementById('modal-warning').setAttribute('hidden','')">編集に戻る</button>
+        <button class="btn btn-primary" onclick="document.getElementById('modal-warning').setAttribute('hidden','')">続行</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-danger" hidden
+       onclick="if(event.target===this)this.setAttribute('hidden','')">
+    <div class="modal modal-sm modal-danger">
+      <div class="modal-header">
+        <span class="modal-title">プロジェクトを削除しますか？</span>
+        <button class="modal-close" onclick="document.getElementById('modal-danger').setAttribute('hidden','')">✕</button>
+      </div>
+      <div class="modal-body">
+        この操作は元に戻せません。プロジェクト内のすべてのデータが削除されます。
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="document.getElementById('modal-danger').setAttribute('hidden','')">キャンセル</button>
+        <button class="btn btn-danger">削除する</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Divider ===== -->
+  <section id="divider" class="comp-section">
+    <h2>Divider</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      セクションを視覚的に区切る。ラベル付きは「または」のように選択肢を分けるときに使う。
+    </p>
+
+    <h3>ラベルなし</h3>
+    <div class="comp-preview col">
+      <hr class="divider-line" style="width:100%">
+    </div>
+    <pre class="code">&lt;hr class=<span class="s">"divider-line"</span>&gt;</pre>
+
+    <h3>ラベル付き</h3>
+    <div class="comp-preview col">
+      <div class="divider" style="width:100%">または</div>
+    </div>
+    <pre class="code">&lt;div class=<span class="s">"divider"</span>&gt;または&lt;/div&gt;</pre>
+  </section>
+
+</main>
+
+<script>
+function switchDemoTab(index) {
+  document.querySelectorAll('#demo-tabs .tab-item-ui').forEach((el, i) => el.classList.toggle('active', i === index));
+  [0, 1, 2].forEach(i => { document.getElementById('demo-panel-' + i).hidden = (i !== index); });
+}
+function openModal(id)  { document.getElementById(id).removeAttribute('hidden'); }
+function closeModal(id) { document.getElementById(id).setAttribute('hidden', ''); }
+
+function cycleSort(th) {
+  th.closest('table').querySelectorAll('.ds-table__sort').forEach(el => {
+    if (el !== th) el.classList.remove('ds-table__sort--asc', 'ds-table__sort--desc');
+  });
+  if (th.classList.contains('ds-table__sort--asc')) {
+    th.classList.replace('ds-table__sort--asc', 'ds-table__sort--desc');
+  } else if (th.classList.contains('ds-table__sort--desc')) {
+    th.classList.remove('ds-table__sort--desc');
+  } else {
+    th.classList.add('ds-table__sort--asc');
+  }
+}
+
+function toggleAllRows(checkbox) {
+  document.querySelectorAll('.row-check').forEach(cb => {
+    cb.checked = checkbox.checked;
+    cb.closest('tr').classList.toggle('is-selected', checkbox.checked);
+  });
+  updateBulkToolbar();
+}
+function updateBulkToolbar() {
+  const all     = document.querySelectorAll('.row-check');
+  const checked = document.querySelectorAll('.row-check:checked');
+  const headerCb = document.getElementById('check-all');
+  headerCb.indeterminate = checked.length > 0 && checked.length < all.length;
+  headerCb.checked = checked.length === all.length && all.length > 0;
+  all.forEach(cb => cb.closest('tr').classList.toggle('is-selected', cb.checked));
+  const toolbar = document.getElementById('bulk-toolbar');
+  toolbar.hidden = checked.length === 0;
+  document.getElementById('bulk-count').textContent = `${checked.length}件選択中`;
+}
+</script>
+<script type="module" src="_layout.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.DS_Store
+
+# Style Dictionary ビルド成果物
+css/variables.css
+docs/css/variables.css

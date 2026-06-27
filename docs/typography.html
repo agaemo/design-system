@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typography — Design System</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar-mount"></aside>
+
+<main class="main">
+  <section id="typography" class="section-anchor">
+    <h2>Typography</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);line-height:var(--line-height-relaxed);margin-bottom:var(--space-5)">
+      フォントファミリー・サイズ・ウェイト・行間・字間のトークンをまとめたもの。これにより「本文は 16px、見出しは 24px で太字」のようなルールを変数として持ち、プロジェクト全体でブレなく使える。<br>
+      サイズや行間は相互に連動しており、<strong>バラバラに使うのではなく用途に応じた組み合わせを選ぶ</strong>こと（下の対応表参照）。
+    </p>
+    <div class="rule">
+      <strong>フォントファミリー:</strong> 現在はシステムフォント（<code>font-sans</code> / <code>--font-family-sans</code>）。日本語プロジェクトでは <code>tokens/typography.json</code> の <code>fontFamily.sans</code> を <code>"Noto Sans JP"</code> に変更し <code>bun run build</code> を実行する。等幅フォントは <code>font-mono</code> / <code>--font-family-mono</code>。
+    </div>
+
+    <h3>Tailwind クラス対応</h3>
+    <table class="token-table">
+      <thead>
+        <tr><th>用途</th><th>Tailwind クラス</th><th>CSS 変数</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="tt-purpose">サンセリフ体</td><td class="tt-tw">font-sans</td><td class="tt-css">var(--font-family-sans)</td></tr>
+        <tr><td class="tt-purpose">等幅（コード）</td><td class="tt-tw">font-mono</td><td class="tt-css">var(--font-family-mono)</td></tr>
+        <tr><td class="tt-purpose">本文</td><td class="tt-tw">text-base</td><td class="tt-css">var(--font-size-base) · 16px</td></tr>
+        <tr><td class="tt-purpose">キャプション・ラベル</td><td class="tt-tw">text-sm</td><td class="tt-css">var(--font-size-sm) · 14px</td></tr>
+        <tr><td class="tt-purpose">小さなラベル</td><td class="tt-tw">text-xs</td><td class="tt-css">var(--font-size-xs) · 12px</td></tr>
+        <tr><td class="tt-purpose">小見出し</td><td class="tt-tw">text-lg / text-xl</td><td class="tt-css">18px / 20px</td></tr>
+        <tr><td class="tt-purpose">セクション見出し</td><td class="tt-tw">text-2xl / text-3xl</td><td class="tt-css">24px / 30px</td></tr>
+        <tr><td class="tt-purpose">ページタイトル</td><td class="tt-tw">text-4xl / text-5xl</td><td class="tt-css">36px / 48px</td></tr>
+        <tr><td class="tt-purpose">本文ウェイト</td><td class="tt-tw">font-normal</td><td class="tt-css">var(--font-weight-normal) · 400</td></tr>
+        <tr><td class="tt-purpose">UI 要素（ボタン等）</td><td class="tt-tw">font-medium</td><td class="tt-css">var(--font-weight-medium) · 500</td></tr>
+        <tr><td class="tt-purpose">見出し</td><td class="tt-tw">font-bold</td><td class="tt-css">var(--font-weight-bold) · 700</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Font Size</h3>
+    <table class="type-table">
+      <tr><td class="type-meta">5xl · 48px</td><td style="font-size:var(--font-size-5xl);line-height:var(--line-height-tight)">Design System</td></tr>
+      <tr><td class="type-meta">4xl · 36px</td><td style="font-size:var(--font-size-4xl);line-height:var(--line-height-tight)">Design System</td></tr>
+      <tr><td class="type-meta">3xl · 30px</td><td style="font-size:var(--font-size-3xl);line-height:var(--line-height-tight)">Design System</td></tr>
+      <tr><td class="type-meta">2xl · 24px</td><td style="font-size:var(--font-size-2xl);line-height:var(--line-height-tight)">Design System</td></tr>
+      <tr><td class="type-meta">xl · 20px</td><td style="font-size:var(--font-size-xl)">Design System</td></tr>
+      <tr><td class="type-meta">lg · 18px</td><td style="font-size:var(--font-size-lg)">Design System</td></tr>
+      <tr><td class="type-meta">base · 16px</td><td style="font-size:var(--font-size-base)">Design System</td></tr>
+      <tr><td class="type-meta">sm · 14px</td><td style="font-size:var(--font-size-sm)">Design System</td></tr>
+      <tr><td class="type-meta">xs · 12px</td><td style="font-size:var(--font-size-xs)">Design System</td></tr>
+    </table>
+
+    <h3>Font Weight</h3>
+    <table class="type-table">
+      <tr><td class="type-meta">normal · 400</td><td style="font-size:var(--font-size-lg);font-weight:var(--font-weight-normal)">The quick brown fox jumps over the lazy dog</td></tr>
+      <tr><td class="type-meta">medium · 500</td><td style="font-size:var(--font-size-lg);font-weight:var(--font-weight-medium)">The quick brown fox jumps over the lazy dog</td></tr>
+      <tr><td class="type-meta">semibold · 600</td><td style="font-size:var(--font-size-lg);font-weight:var(--font-weight-semibold)">The quick brown fox jumps over the lazy dog</td></tr>
+      <tr><td class="type-meta">bold · 700</td><td style="font-size:var(--font-size-lg);font-weight:var(--font-weight-bold)">The quick brown fox jumps over the lazy dog</td></tr>
+    </table>
+
+    <h3>Monospace</h3>
+    <div style="font-family:var(--font-family-mono);font-size:var(--font-size-sm);background:var(--surface-inset);color:var(--text-primary);padding:var(--space-4);border-radius:var(--radius-lg);border:1px solid var(--border)">
+      <div style="color:var(--text-muted)">/* CSS変数の使い方 */</div>
+      <div style="margin-top:var(--space-2)">.button {</div>
+      <div style="padding-left:var(--space-4)">background: <span style="color:var(--accent)">var(--accent)</span>;</div>
+      <div style="padding-left:var(--space-4)">color: <span style="color:var(--accent)">var(--text-inverse)</span>;</div>
+      <div style="padding-left:var(--space-4)">border-radius: <span style="color:var(--accent)">var(--radius-md)</span>;</div>
+      <div style="padding-left:var(--space-4)">padding: <span style="color:var(--accent)">var(--space-2) var(--space-4)</span>;</div>
+      <div>}</div>
+    </div>
+  </section>
+</main>
+
+<script type="module" src="_layout.js"></script>
+</body>
+</html>

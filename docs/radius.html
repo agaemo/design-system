@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Border Radius — Design System</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar-mount"></aside>
+
+<main class="main">
+  <section id="radius" class="section-anchor">
+    <h2>Border Radius</h2>
+    <div class="rule">
+      <strong>コンポーネントの種類に応じて使い分ける。</strong>一段階ずれると印象が大きく変わるため、下の対応表を守る。
+    </div>
+
+    <table class="token-table">
+      <thead>
+        <tr><th>用途</th><th>Tailwind クラス</th><th>CSS 変数</th><th>値</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="tt-purpose">ボタン・入力欄</td><td class="tt-tw">rounded-md</td><td class="tt-css">var(--radius-md)</td><td class="tt-css">6px</td></tr>
+        <tr><td class="tt-purpose">カード・パネル</td><td class="tt-tw">rounded-lg</td><td class="tt-css">var(--radius-lg)</td><td class="tt-css">8px</td></tr>
+        <tr><td class="tt-purpose">ダイアログ・ポップオーバー</td><td class="tt-tw">rounded-xl</td><td class="tt-css">var(--radius-xl)</td><td class="tt-css">12px</td></tr>
+        <tr><td class="tt-purpose">モーダル・大きなコンテナ</td><td class="tt-tw">rounded-2xl</td><td class="tt-css">var(--radius-2xl)</td><td class="tt-css">16px</td></tr>
+        <tr><td class="tt-purpose">バッジ・ピル・タグ</td><td class="tt-tw">rounded-full</td><td class="tt-css">var(--radius-full)</td><td class="tt-css">9999px</td></tr>
+        <tr><td class="tt-purpose">テーブルセル・隣接要素</td><td class="tt-tw">rounded-none</td><td class="tt-css">var(--radius-none)</td><td class="tt-css">0px</td></tr>
+      </tbody>
+    </table>
+
+    <div class="radius-grid">
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-none)"></div><div class="radius-label">none · 0px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-sm)"></div><div class="radius-label">sm · 2px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius)"></div><div class="radius-label">base · 4px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-md)"></div><div class="radius-label">md · 6px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-lg)"></div><div class="radius-label">lg · 8px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-xl)"></div><div class="radius-label">xl · 12px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-2xl)"></div><div class="radius-label">2xl · 16px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-3xl)"></div><div class="radius-label">3xl · 24px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:var(--radius-full)"></div><div class="radius-label">full</div></div>
+    </div>
+  </section>
+</main>
+
+<script type="module" src="_layout.js"></script>
+</body>
+</html>

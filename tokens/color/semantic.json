@@ -9,26 +9,26 @@
 
   "border":       { "$value": "{color.neutral.200}", "$type": "color" },
   "borderStrong": { "$value": "{color.neutral.300}", "$type": "color" },
-  "borderFocus":  { "$value": "{color.blue.500}",    "$type": "color" },
+  "borderFocus":  { "$value": "{color.indigo.500}",  "$type": "color" },
 
   "textPrimary":   { "$value": "{color.neutral.900}", "$type": "color" },
   "textSecondary": { "$value": "{color.neutral.600}", "$type": "color" },
   "textMuted":     { "$value": "{color.neutral.400}", "$type": "color" },
   "textDisabled":  { "$value": "{color.neutral.300}", "$type": "color" },
   "textInverse":   { "$value": "{color.neutral.0}",   "$type": "color" },
-  "textAccent":    { "$value": "{color.blue.600}",    "$type": "color" },
+  "textAccent":    { "$value": "{color.indigo.600}",  "$type": "color" },
 
-  "accent":       { "$value": "{color.blue.500}", "$type": "color" },
-  "accentHover":  { "$value": "{color.blue.600}", "$type": "color" },
-  "accentSubtle": { "$value": "{color.blue.50}",  "$type": "color" },
-  "accentText":   { "$value": "{color.blue.600}", "$type": "color" },
+  "accent":       { "$value": "{color.indigo.500}", "$type": "color" },
+  "accentHover":  { "$value": "{color.indigo.600}", "$type": "color" },
+  "accentSubtle": { "$value": "{color.indigo.50}",  "$type": "color" },
+  "accentText":   { "$value": "{color.indigo.600}", "$type": "color" },
 
   "statusSuccess":   { "$value": "{color.green.500}",  "$type": "color" },
   "statusWarning":   { "$value": "{color.yellow.500}", "$type": "color" },
   "statusError":     { "$value": "{color.red.500}",    "$type": "color" },
-  "statusInfo":      { "$value": "{color.blue.500}",   "$type": "color" },
+  "statusInfo":      { "$value": "{color.indigo.500}", "$type": "color" },
   "statusSuccessBg": { "$value": "{color.green.50}",   "$type": "color" },
   "statusWarningBg": { "$value": "{color.yellow.50}",  "$type": "color" },
   "statusErrorBg":   { "$value": "{color.red.50}",     "$type": "color" },
-  "statusInfoBg":    { "$value": "{color.blue.50}",    "$type": "color" }
+  "statusInfoBg":    { "$value": "{color.indigo.50}",  "$type": "color" }
 }

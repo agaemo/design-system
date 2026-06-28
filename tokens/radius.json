@@ -1,11 +1,11 @@
 {
   "radiusNone":  { "$value": "0px" },
-  "radiusSm":    { "$value": "2px" },
-  "radius":      { "$value": "4px" },
-  "radiusMd":    { "$value": "6px" },
-  "radiusLg":    { "$value": "8px" },
-  "radiusXl":    { "$value": "12px" },
-  "radius-2xl":  { "$value": "16px" },
-  "radius-3xl":  { "$value": "24px" },
+  "radiusSm":    { "$value": "3px" },
+  "radius":      { "$value": "5px" },
+  "radiusMd":    { "$value": "8px" },
+  "radiusLg":    { "$value": "12px" },
+  "radiusXl":    { "$value": "16px" },
+  "radius-2xl":  { "$value": "20px" },
+  "radius-3xl":  { "$value": "28px" },
   "radiusFull":  { "$value": "9999px" }
 }

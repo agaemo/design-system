@@ -134,9 +134,9 @@ ${tokens.map(t => swatchCard(t, t.name.replace('color-', ''))).join('\n')}
         <tr><td class="tt-purpose">薄いテキスト</td><td class="tt-tw">text-foreground-muted</td><td class="tt-css">var(--text-muted)</td></tr>
         <tr><td class="tt-purpose">無効テキスト</td><td class="tt-tw">text-foreground-disabled</td><td class="tt-css">var(--text-disabled)</td></tr>
         <tr><td class="tt-purpose">反転テキスト</td><td class="tt-tw">text-foreground-inverse</td><td class="tt-css">var(--text-inverse)</td></tr>
-        <tr><td class="tt-purpose">ボタン・インタラクティブ背景</td><td class="tt-tw">bg-accent</td><td class="tt-css">var(--accent)</td></tr>
-        <tr><td class="tt-purpose">ホバー時</td><td class="tt-tw">hover:bg-accent-hover</td><td class="tt-css">var(--accent-hover)</td></tr>
-        <tr><td class="tt-purpose">薄いアクセント背景</td><td class="tt-tw">bg-accent-subtle</td><td class="tt-css">var(--accent-subtle)</td></tr>
+        <tr><td class="tt-purpose">ボタン・インタラクティブ背景</td><td class="tt-tw">bg-accent</td><td class="tt-css">var(--accent) #6366f1</td></tr>
+        <tr><td class="tt-purpose">ホバー時</td><td class="tt-tw">hover:bg-accent-hover</td><td class="tt-css">var(--accent-hover) #4f46e5</td></tr>
+        <tr><td class="tt-purpose">薄いアクセント背景</td><td class="tt-tw">bg-accent-subtle</td><td class="tt-css">var(--accent-subtle) #eef2ff</td></tr>
         <tr><td class="tt-purpose">枠線（通常）</td><td class="tt-tw">border-border</td><td class="tt-css">var(--border)</td></tr>
         <tr><td class="tt-purpose">枠線（強調）</td><td class="tt-tw">border-border-strong</td><td class="tt-css">var(--border-strong)</td></tr>
         <tr><td class="tt-purpose">フォーカスリング</td><td class="tt-tw">ring-1 ring-border-focus</td><td class="tt-css">var(--border-focus)</td></tr>
@@ -355,10 +355,10 @@ StyleDictionary.registerFormat({
         <tr><th>用途</th><th>Tailwind クラス</th><th>CSS 変数</th><th>値</th></tr>
       </thead>
       <tbody>
-        <tr><td class="tt-purpose">ボタン・入力欄</td><td class="tt-tw">rounded-md</td><td class="tt-css">var(--radius-md)</td><td class="tt-css">6px</td></tr>
-        <tr><td class="tt-purpose">カード・パネル</td><td class="tt-tw">rounded-lg</td><td class="tt-css">var(--radius-lg)</td><td class="tt-css">8px</td></tr>
-        <tr><td class="tt-purpose">ダイアログ・ポップオーバー</td><td class="tt-tw">rounded-xl</td><td class="tt-css">var(--radius-xl)</td><td class="tt-css">12px</td></tr>
-        <tr><td class="tt-purpose">モーダル・大きなコンテナ</td><td class="tt-tw">rounded-2xl</td><td class="tt-css">var(--radius-2xl)</td><td class="tt-css">16px</td></tr>
+        <tr><td class="tt-purpose">ボタン・入力欄</td><td class="tt-tw">rounded-md</td><td class="tt-css">var(--radius-md)</td><td class="tt-css">8px</td></tr>
+        <tr><td class="tt-purpose">カード・パネル</td><td class="tt-tw">rounded-lg</td><td class="tt-css">var(--radius-lg)</td><td class="tt-css">12px</td></tr>
+        <tr><td class="tt-purpose">ダイアログ・ポップオーバー</td><td class="tt-tw">rounded-xl</td><td class="tt-css">var(--radius-xl)</td><td class="tt-css">16px</td></tr>
+        <tr><td class="tt-purpose">モーダル・大きなコンテナ</td><td class="tt-tw">rounded-2xl</td><td class="tt-css">var(--radius-2xl)</td><td class="tt-css">20px</td></tr>
         <tr><td class="tt-purpose">バッジ・ピル・タグ</td><td class="tt-tw">rounded-full</td><td class="tt-css">var(--radius-full)</td><td class="tt-css">9999px</td></tr>
         <tr><td class="tt-purpose">テーブルセル・隣接要素</td><td class="tt-tw">rounded-none</td><td class="tt-css">var(--radius-none)</td><td class="tt-css">0px</td></tr>
       </tbody>

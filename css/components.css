@@ -127,7 +127,7 @@
   font-size: var(--font-size-sm);
   font-family: var(--font-family-sans);
   color: var(--text-primary);
-  background: var(--bg-base);
+  background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   transition:

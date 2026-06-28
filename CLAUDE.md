@@ -25,7 +25,7 @@ design-system/
 ├── bunfig.toml            # bun設定（runはbunランタイムを強制）
 ├── vite.config.ts         # Viteビルド設定（マルチページ）
 ├── tsconfig.json          # TypeScript設定（エディタ・型チェック用）
-├── sd.config.ts           # Style Dictionary ビルド設定
+├── sd.config.ts           # Style Dictionary ビルド設定・HTMLフォーマット定義
 ├── tokens/                # トークン定義（JSON・編集対象）
 │   ├── color/
 │   │   ├── primitive.json
@@ -35,37 +35,38 @@ design-system/
 │   ├── radius.json
 │   └── shadow.json
 ├── css/
-│   └── variables.css      # CSS変数（bun run build で自動生成）
+│   ├── variables.css      # CSS変数（bun run build:tokens で自動生成）
+│   └── components.css     # コンポーネントクラス定義（手動管理・配布対象）
 ├── tailwind/
 │   └── tailwind.config.ts # 共有Tailwind設定（ローカル参照専用）
 └── docs/                  # ホスティング公開用サイト一式
-    ├── index.html          # トップページ
-    ├── colors.html         # カラートークンプレビュー
-    ├── typography.html     # タイポグラフィプレビュー
-    ├── spacing.html        # スペーシングプレビュー
-    ├── radius.html         # 角丸プレビュー
-    ├── shadow.html         # 影プレビュー
-    ├── components.html     # コンポーネント例
+    ├── index.html          # トップページ（手動管理）
+    ├── colors.html         # カラートークンプレビュー（bun run build:tokens で自動生成）
+    ├── typography.html     # タイポグラフィプレビュー（自動生成）
+    ├── spacing.html        # スペーシングプレビュー（自動生成）
+    ├── radius.html         # 角丸プレビュー（自動生成）
+    ├── shadow.html         # 影プレビュー（自動生成）
+    ├── components.html     # コンポーネント例（手動管理）
     ├── components-forms.html
     ├── components-layout.html
-    ├── shared.css          # プレビューサイト共通スタイル
-    ├── components.css      # プレビューサイトコンポーネントスタイル
+    ├── shared.css          # プレビューサイト共通スタイル（手動管理）
     ├── _layout.js          # プレビューサイトレイアウトスクリプト
-    ├── _sidebar.html       # サイドバーパーシャル
+    ├── _sidebar.html       # サイドバーパーシャル（手動管理）
     ├── tokens.md           # トークンリファレンス
     ├── public/
     │   └── llms.txt        # AI参照用（curl可能・Viteが /llms.txt として配信）
     └── css/
-        └── variables.css   # bun run build でコピーされる生成CSS
+        ├── variables.css   # bun run build:tokens でコピーされる生成CSS
+        └── components.css  # bun run build:tokens で css/components.css からコピー
 ```
 
 ## スクリプト
 
 | コマンド | 内容 |
 |---|---|
-| `bun run dev` | Vite dev server 起動（localhost:5173） |
+| `bun run dev` | トークンビルド → Vite dev server 起動（localhost:5173） |
 | `bun run build` | トークンビルド → Viteビルド → `dist/` に出力 |
-| `bun run build:tokens` | CSS変数のみ生成（Viteビルドなし） |
+| `bun run build:tokens` | CSS変数 + docs/*.html を生成（Viteビルドなし） |
 | `bun run lint` | oxlint でlint |
 | `bun run format` | oxfmt でフォーマット |
 
@@ -74,8 +75,14 @@ design-system/
 ```
 tokens/ (JSON)
   ↓ bun sd.config.ts
-css/variables.css          # ローカル参照用（他プロジェクトが直接 import）
-docs/css/variables.css     # プレビューサイト用（Viteがバンドル）
+css/variables.css                              # ローカル参照用（他プロジェクトが直接 import）
+docs/{colors,typography,spacing,radius,shadow,animation}.html  # プレビューページ（自動生成）
+docs/css/variables.css                         # プレビューサイト用（Viteがバンドル）
+
+css/components.css（手動管理）
+  ↓ cp（build:tokens / build スクリプト）
+docs/css/components.css                        # プレビューサイト用（Viteがバンドル）
+
   ↓ vite build
 dist/                      # デプロイ対象（ホスティングサービスに公開）
   ├── *.html
@@ -83,7 +90,8 @@ dist/                      # デプロイ対象（ホスティングサービス
   └── assets/
 ```
 
-`docs/` 以下の HTML・CSS ファイルは手動管理。`docs/css/variables.css` のみビルドで生成。
+トークンカテゴリのプレビューページ（colors.html 等）は `sd.config.ts` 内のフォーマット関数で生成。  
+手動管理ファイル: `docs/index.html`・`docs/components*.html`・`docs/_sidebar.html`・`docs/shared.css`・`css/components.css`。
 
 ## 別プロジェクトでの使い方
 
@@ -100,15 +108,17 @@ export default { ...baseConfig, content: ['./src/**/*.{html,js,ts,jsx,tsx}'] }
 ```css
 /* globals.css */
 @import '../design-system/css/variables.css';
+@import '../design-system/css/components.css'; /* コンポーネントクラスも使う場合 */
 ```
 
 ### パターンB: ホスティング経由（URL参照）
 
-`docs/` をデプロイ済みの場合、CSS変数のみURLで参照できる。
+`docs/` をデプロイ済みの場合（Cloudflare Pages 等）、CSS ファイルを URL で参照できる。
 **tailwind.config.ts はNode.jsモジュールのためURL経由では使用不可。**
 
 ```css
 @import 'https://your-domain/css/variables.css';
+@import 'https://your-domain/css/components.css'; /* コンポーネントクラスも使う場合 */
 ```
 
 ### CSS変数のみ使う場合（パターンA）
@@ -116,6 +126,14 @@ export default { ...baseConfig, content: ['./src/**/*.{html,js,ts,jsx,tsx}'] }
 ```html
 <link rel="stylesheet" href="../design-system/css/variables.css">
 ```
+
+## 変更時に合わせて更新が必要なファイル
+
+トークン・コンポーネント・使い方に変更を加えた場合、以下を忘れずに更新すること：
+
+- `README.md` — ディレクトリ構成・使い方・トークン早見表
+- `docs/public/llms.txt` — AI 参照用のトークン・クラス一覧
+- `CLAUDE.md` — ディレクトリ構成・ビルドフロー・トークン定義状況
 
 ## AIへの指示
 
@@ -135,3 +153,4 @@ export default { ...baseConfig, content: ['./src/**/*.{html,js,ts,jsx,tsx}'] }
 | スペーシング | 定義済み（4px ベーススケール） |
 | 角丸 | 定義済み |
 | 影 | 定義済み |
+| アニメーション | 定義済み（duration / easing） |

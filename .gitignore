@@ -2,6 +2,14 @@ node_modules/
 dist/
 .DS_Store
 
-# Style Dictionary ビルド成果物
+# Style Dictionary ビルド成果物（bun run build:tokens で生成）
 css/variables.css
 docs/css/variables.css
+docs/colors.html
+docs/typography.html
+docs/spacing.html
+docs/radius.html
+docs/shadow.html
+docs/animation.html
+docs/css/components.css
+docs/components.css

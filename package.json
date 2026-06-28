@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "bun sd.config.ts && mkdir -p docs/css && cp css/variables.css docs/css/variables.css && vite build",
-    "build:tokens": "bun sd.config.ts && mkdir -p docs/css && cp css/variables.css docs/css/variables.css",
+    "dev": "bun run build:tokens && vite",
+    "build": "bun sd.config.ts && mkdir -p docs/css && cp css/variables.css docs/css/variables.css && cp css/components.css docs/css/components.css && vite build",
+    "build:tokens": "bun sd.config.ts && mkdir -p docs/css && cp css/variables.css docs/css/variables.css && cp css/components.css docs/css/components.css",
     "lint": "oxlint .",
     "format": "oxfmt ."
   },

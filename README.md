@@ -17,14 +17,22 @@ design-system/
 │   ├── radius.json            # 角丸
 │   └── shadow.json            # 影
 ├── css/
-│   └── variables.css          # CSS カスタムプロパティ（ビルド生成）
+│   ├── variables.css          # CSS カスタムプロパティ（ビルド生成）
+│   └── components.css         # コンポーネントクラス定義（手動管理・配布対象）
 ├── tailwind/
 │   └── tailwind.config.ts     # 共有 Tailwind 設定（ローカル参照専用）
 ├── docs/                      # トークンビジュアルドキュメント（Vite dev/build 対象）
+│   ├── index.html             # トップページ（手動管理）
+│   ├── colors.html            # カラートークンプレビュー（ビルド生成）
+│   ├── typography.html        # タイポグラフィプレビュー（ビルド生成）
+│   ├── spacing.html           # スペーシングプレビュー（ビルド生成）
+│   ├── radius.html            # 角丸プレビュー（ビルド生成）
+│   ├── shadow.html            # 影プレビュー（ビルド生成）
+│   ├── components*.html       # コンポーネント例（手動管理）
 │   └── public/
 │       └── llms.txt           # AI 参照用（/llms.txt でアクセス可能）
 ├── dist/                      # Vite ビルド出力（デプロイ対象）
-├── sd.config.ts               # Style Dictionary ビルド設定
+├── sd.config.ts               # Style Dictionary ビルド設定・HTML 生成フォーマット
 └── package.json
 ```
 
@@ -33,13 +41,36 @@ design-system/
 ```bash
 mise install    # bun をインストール
 bun install
-bun run build   # tokens/ → css/variables.css 生成 + Vite ビルド
-bun run dev     # ドキュメントサーバーを起動（http://localhost:5173）
+bun run dev     # トークンビルド → ドキュメントサーバー起動（http://localhost:5173）
+```
+
+## ビルドフロー
+
+```
+tokens/*.json
+  ↓ bun run build:tokens（sd.config.ts）
+css/variables.css          # CSS 変数
+docs/{colors,typography,spacing,radius,shadow}.html  # プレビューページ（自動生成）
+  ↓ vite build
+dist/                      # デプロイ対象
+```
+
+`tokens/` を編集して `bun run build:tokens` を実行すると、CSS 変数とドキュメントページが同時に更新される。
+
+## トークン変更の手順
+
+```bash
+# 1. tokens/ 内の JSON を編集
+# 2. ビルド
+bun run build:tokens
+# 3. ブラウザが自動リロードされ反映を確認（dev server 起動中の場合）
 ```
 
 ## 別プロジェクトでの使い方
 
-### Tailwind CSS プロジェクト（ローカル参照）
+### パターンA: ローカル参照
+
+
 
 ```ts
 // tailwind.config.ts
@@ -51,13 +82,37 @@ export default {
 }
 ```
 
-`css/variables.css` もプロジェクト側で読み込む。
-
 ```css
+/* globals.css */
 @import '../design-system/css/variables.css';
 ```
 
-### CSS 変数のみ使う場合
+### コンポーネントクラスも使う場合
+
+```html
+<link rel="stylesheet" href="../design-system/css/variables.css">
+<link rel="stylesheet" href="../design-system/css/components.css">
+```
+
+```css
+/* または CSS の @import */
+@import '../design-system/css/variables.css';
+@import '../design-system/css/components.css';
+```
+
+`css/components.css` は `variables.css` の CSS 変数を前提とするため、必ず両方を読み込む。
+
+### パターンB: ホスティング経由（URL参照）
+
+`docs/` をデプロイ済みの場合（Cloudflare Pages 等）、CSS ファイルを URL で参照できる。
+パスを気にせずどのプロジェクトからでも使える。
+
+```css
+@import 'https://your-domain/css/variables.css';
+@import 'https://your-domain/css/components.css'; /* コンポーネントクラスも使う場合 */
+```
+
+### CSS 変数のみ使う場合（Tailwind など既存の CSS フレームワークがある場合）
 
 ```html
 <link rel="stylesheet" href="../design-system/css/variables.css">
@@ -72,7 +127,8 @@ export default {
 | テキスト | `--text-*` | `--text-primary`, `--text-secondary`, `--text-muted` |
 | ボーダー | `--border*` | `--border`, `--border-strong`, `--border-focus` |
 | アクセント | `--accent*` | `--accent`, `--accent-hover`, `--accent-subtle` |
-| ステータス | `--status-*` | `--status-success`, `--status-error`, `--status-warning` |
+| ステータス | `--status-*` | `--status-success`, `--status-error`, `--status-warning`, `--status-*-bg` |
+| アニメーション | `--duration-*` / `--easing-*` | `--duration-fast`(100ms), `--easing-out` |
 | スペーシング | `--space-*` | `--space-1`(4px) 〜 `--space-32`(128px) |
 | 角丸 | `--radius-*` | `--radius-sm`〜`--radius-full` |
 | 影 | `--shadow-*` | `--shadow-sm`〜`--shadow-xl` |

@@ -18,4 +18,17 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: { input },
   },
+  plugins: [
+    {
+      name: 'utf8-text',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.url?.endsWith('.txt')) {
+            res.setHeader('Content-Type', 'text/plain; charset=UTF-8')
+          }
+          next()
+        })
+      },
+    },
+  ],
 })

@@ -7,7 +7,7 @@
   <title>Forms — Components — Design System</title>
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="shared.css">
-  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="css/components.css">
   <style>
     .comp-preview {
       background: var(--bg-base);
@@ -150,6 +150,73 @@
 &lt;/div&gt;</pre>
   </section>
 
+  <!-- ===== Combobox ===== -->
+  <section id="combobox" class="comp-section">
+    <h2>Combobox</h2>
+    <p style="font-size:var(--font-size-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+      選択肢が多い場合や検索で絞り込みたい場合に使う。CSS クラスは見た目を定義するのみで、<strong>動作 JS は各プロジェクトで実装する</strong>。
+    </p>
+    <p style="font-size:var(--font-size-xs);background:var(--status-warning-bg);color:var(--text-primary);border:1px solid var(--status-warning);border-radius:var(--radius-md);padding:var(--space-2) var(--space-3);margin-bottom:var(--space-4)">
+      ⚠ 下記のデモ JS はあくまで表示確認用のサンプルです。キーボード操作・ARIA 属性・アクセシビリティ対応は各プロジェクト側で実装してください。
+    </p>
+
+    <h3>基本</h3>
+    <div class="comp-preview">
+      <div class="form-group w-80">
+        <label class="form-label" for="ex-city">都市</label>
+        <div class="combobox" id="demo-combobox">
+          <input class="form-input combobox-input" id="ex-city" type="text" placeholder="検索..." autocomplete="off">
+          <div class="combobox-dropdown" hidden>
+            <ul class="combobox-list">
+              <li class="combobox-option">東京</li>
+              <li class="combobox-option">大阪</li>
+              <li class="combobox-option">名古屋</li>
+              <li class="combobox-option">福岡</li>
+              <li class="combobox-option">札幌</li>
+              <li class="combobox-option">仙台</li>
+              <li class="combobox-option">広島</li>
+              <li class="combobox-option">京都</li>
+            </ul>
+            <div class="combobox-empty" hidden>一致する項目がありません</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pre class="code"><span class="c">&lt;!-- CSS クラス構造 --&gt;</span>
+&lt;div class=<span class="s">"form-group"</span>&gt;
+  &lt;label class=<span class="s">"form-label"</span> for=<span class="s">"city"</span>&gt;都市&lt;/label&gt;
+  &lt;div class=<span class="s">"combobox"</span>&gt;
+    &lt;input class=<span class="s">"form-input combobox-input"</span> id=<span class="s">"city"</span> type=<span class="s">"text"</span>
+           placeholder=<span class="s">"検索..."</span> autocomplete=<span class="s">"off"</span>&gt;
+    &lt;div class=<span class="s">"combobox-dropdown"</span> hidden&gt;
+      &lt;ul class=<span class="s">"combobox-list"</span>&gt;
+        &lt;li class=<span class="s">"combobox-option"</span>&gt;東京&lt;/li&gt;
+        &lt;li class=<span class="s">"combobox-option"</span>&gt;大阪&lt;/li&gt;
+        <span class="c">&lt;!-- ... --&gt;</span>
+      &lt;/ul&gt;
+      &lt;div class=<span class="s">"combobox-empty"</span> hidden&gt;一致する項目がありません&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+    <h3>状態クラス</h3>
+    <div class="comp-preview col" style="gap:var(--space-1)">
+      <ul class="combobox-list" style="position:static;border:1px solid var(--border);border-radius:var(--radius-md);width:200px">
+        <li class="combobox-option">通常の選択肢</li>
+        <li class="combobox-option is-active">is-active（フォーカス中）</li>
+        <li class="combobox-option is-selected">is-selected（選択済み）</li>
+      </ul>
+    </div>
+    <pre class="code"><span class="c">&lt;!-- JS 側で付け外しするクラス --&gt;</span>
+&lt;li class=<span class="s">"combobox-option"</span>&gt;通常&lt;/li&gt;
+&lt;li class=<span class="s">"combobox-option is-active"</span>&gt;キーボードフォーカス中&lt;/li&gt;
+&lt;li class=<span class="s">"combobox-option is-selected"</span>&gt;選択済み&lt;/li&gt;</pre>
+
+    <p class="comp-note">
+      JS 実装時の参考: フォーカス時に <code>combobox-dropdown</code> の <code>hidden</code> を外す。入力に応じて <code>combobox-option</code> を <code>hidden</code> で絞り込む。選択時に <code>is-selected</code> を付与して <code>hidden</code> を戻す。外部クリックで閉じる。
+    </p>
+  </section>
+
   <!-- ===== Checkbox ===== -->
   <section id="checkbox" class="comp-section">
     <h2>Checkbox</h2>
@@ -242,6 +309,47 @@
 
 </main>
 
+<script>
+/* ================================================================
+   ⚠ サンプル実装 — デモ表示確認専用
+   キーボード操作・ARIA・アクセシビリティ対応は含まれません。
+   実際の実装は各プロジェクト側で行ってください。
+   ================================================================ */
+(function () {
+  const wrap     = document.getElementById('demo-combobox')
+  const input    = wrap.querySelector('.combobox-input')
+  const dropdown = wrap.querySelector('.combobox-dropdown')
+  const options  = [...wrap.querySelectorAll('.combobox-option')]
+  const empty    = wrap.querySelector('.combobox-empty')
+
+  function open()  { dropdown.removeAttribute('hidden') }
+  function close() { dropdown.setAttribute('hidden', '') }
+
+  input.addEventListener('focus', open)
+  input.addEventListener('input', function () {
+    const q = this.value.toLowerCase()
+    let visible = 0
+    options.forEach(function (opt) {
+      const match = opt.textContent.toLowerCase().includes(q)
+      match ? opt.removeAttribute('hidden') : opt.setAttribute('hidden', '')
+      if (match) visible++
+    })
+    visible > 0 ? empty.setAttribute('hidden', '') : empty.removeAttribute('hidden')
+    open()
+  })
+  options.forEach(function (opt) {
+    opt.addEventListener('click', function () {
+      input.value = opt.textContent
+      options.forEach(function (o) { o.classList.remove('is-selected') })
+      opt.classList.add('is-selected')
+      close()
+    })
+  })
+  document.addEventListener('click', function (e) {
+    if (!wrap.contains(e.target)) close()
+  })
+}())
+</script>
 <script type="module" src="_layout.js"></script>
 </body>
 </html>

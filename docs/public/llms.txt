@@ -1,14 +1,24 @@
 # Personal Design System — AI コンテキスト
 
-デザイントークンと CSS カスタムプロパティを管理するリポジトリ。
-コンポーネントは管理しない。トークンとスタイルルールのみ。
+デザイントークン・CSS カスタムプロパティ・コンポーネントクラスを管理するリポジトリ。
+コンポーネントの実装（React/Vue 等）は各プロジェクトで行う。
+
+## 配布ファイル
+
+- `css/variables.css` — CSS カスタムプロパティ（トークンから自動生成）
+- `css/components.css` — コンポーネントクラス定義（手動管理）。`variables.css` の変数を参照するため必ず両方読み込む
+
+```css
+@import '../design-system/css/variables.css';
+@import '../design-system/css/components.css';
+```
 
 ## 使用ルール
 
 - `tokens/` の JSON に定義されたトークン名・値を使うこと
 - 色・サイズをハードコードしないこと
 - 新しいトークンが必要な場合はユーザーに確認すること
-- Tailwind を使う場合は `tailwind/tailwind.config.js` のカスタムトークンを優先すること
+- Tailwind を使う場合は `tailwind/tailwind.config.ts` のカスタムトークンを優先すること
 
 ## CSS カスタムプロパティ一覧
 
@@ -57,6 +67,11 @@
 ### 影
 - `--shadow-sm` `--shadow` `--shadow-md` `--shadow-lg` `--shadow-xl`
 
+### アニメーション
+- duration: `--duration-instant`(50ms) `--duration-fast`(100ms) `--duration-normal`(200ms) `--duration-slow`(300ms) `--duration-slower`(500ms)
+- easing: `--easing-default` `--easing-linear` `--easing-in` `--easing-out` `--easing-in-out` `--easing-spring`
+- 使用例: `transition: color var(--duration-fast) var(--easing-out)`
+
 ### タイポグラフィ
 - フォント: `--font-family-sans` / `--font-family-mono`
 - サイズ: `--font-size-xs`(0.75rem) `--font-size-sm`(0.875rem) `--font-size-base`(1rem) `--font-size-lg`(1.125rem) `--font-size-xl`(1.25rem) `--font-size-2xl`(1.5rem)
@@ -72,6 +87,56 @@
 - フォント: `font-sans` `font-mono` `text-sm` `text-base` `font-medium` `font-semibold`
 - 角丸: `rounded-sm` `rounded-md` `rounded-lg` `rounded-xl` `rounded-full`
 - 影: `shadow-sm` `shadow-md` `shadow-lg`
+
+## コンポーネントクラス（css/components.css）
+
+`variables.css` と合わせて読み込むことで使用可能。JS 不要で見た目が決まる。
+
+### Button
+- `.btn` — 基底クラス（必須）
+- `.btn-primary` / `.btn-outline` / `.btn-ghost` / `.btn-danger` — バリアント
+- `.btn-sm` / `.btn-lg` — サイズ
+
+### Badge
+- `.badge` — 基底クラス（必須）
+- `.badge-neutral` / `.badge-success` / `.badge-warning` / `.badge-error` / `.badge-info` / `.badge-accent`
+
+### Card
+- `.card` `.card-header` `.card-title` `.card-subtitle` `.card-body` `.card-footer`
+
+### Alert
+- `.alert` — 基底クラス（必須）
+- `.alert-info` / `.alert-success` / `.alert-warning` / `.alert-error`
+- `.alert-icon` `.alert-body` `.alert-title`
+
+### Form
+- `.form-group` `.form-label` `.form-required` `.form-helper` `.form-error`
+- `.form-input` / `.form-textarea` / `.form-select` — 入力系
+- `.is-error` — エラー状態
+
+### Combobox（検索付きドロップダウン）
+- `.combobox` `.combobox-dropdown` `.combobox-list` `.combobox-option` `.combobox-empty`
+- `.is-active`（キーボードフォーカス）/ `.is-selected`（選択済み）を JS で付け外しする
+- 動作 JS は各プロジェクトで実装すること
+
+### Checkbox / Toggle
+- `.checkbox-wrap` `.checkbox-label` `.checkbox-hint`
+- `.toggle-wrap` `.toggle-track` `.toggle-thumb` `.toggle-label`
+- Toggle ON: `.toggle-track` に `.on` を追加
+
+### Avatar
+- `.avatar` `.avatar-sm` / `.avatar-md` / `.avatar-lg` / `.avatar-xl`
+- `.avatar-group`（複数アバターを重ねる）
+
+### その他
+- `.spinner` `.spinner-sm` / `.spinner-md` / `.spinner-lg`
+- `.divider` / `.divider-line`
+- `.tab-list-ui` `.tab-item-ui`（`.active` で選択状態）`.tab-panel-ui`
+- `.ds-table` `.ds-table__sort` `.ds-table__sort--asc` / `--desc` `.ds-table__check` `.is-selected`
+- `.ds-table-toolbar` `.ds-table-toolbar__count`
+- `.modal-backdrop` `.modal` `.modal-sm` / `.modal-lg` `.modal-header` `.modal-title` `.modal-close` `.modal-body` `.modal-footer`
+- `.modal-warning` / `.modal-danger` — 上部ボーダーで重要度を表現
+- `.tooltip-wrap` `.tooltip-bubble`
 
 ## プリミティブカラー（直接使用は避ける）
 

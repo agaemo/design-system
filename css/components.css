@@ -1,6 +1,6 @@
 /* ==========================================================
-   Component CSS
-   design-system/css/variables.css を読み込んだ上で使う。
+   Design System — Component Classes
+   css/variables.css を読み込んだ上で使う。
    class 名の一覧と用途は /docs/components*.html を参照。
    ========================================================== */
 
@@ -19,7 +19,11 @@
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
-  transition: background 120ms, color 120ms, border-color 120ms, box-shadow 120ms;
+  transition:
+    background var(--duration-fast) var(--easing-out),
+    color var(--duration-fast) var(--easing-out),
+    border-color var(--duration-fast) var(--easing-out),
+    box-shadow var(--duration-fast) var(--easing-out);
 }
 .btn:focus-visible { outline: 2px solid var(--border-focus); outline-offset: 2px; }
 .btn:disabled      { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
@@ -51,11 +55,11 @@
   line-height: 1.4;
 }
 .badge-neutral { background: var(--surface-subtle); color: var(--text-secondary); border-color: var(--border); }
-.badge-success { background: var(--status-success-subtle); color: var(--status-success); }
-.badge-warning { background: var(--status-warning-subtle); color: var(--status-warning); }
-.badge-error   { background: var(--status-error-subtle);   color: var(--status-error); }
-.badge-info    { background: var(--status-info-subtle);    color: var(--status-info); }
-.badge-accent  { background: var(--accent-subtle);         color: var(--accent); }
+.badge-success { background: var(--status-success-bg); color: var(--status-success); }
+.badge-warning { background: var(--status-warning-bg); color: var(--status-warning); }
+.badge-error   { background: var(--status-error-bg);   color: var(--status-error); }
+.badge-info    { background: var(--status-info-bg);    color: var(--status-info); }
+.badge-accent  { background: var(--accent-subtle);     color: var(--accent); }
 
 /* ------ Card ------ */
 .card {
@@ -103,10 +107,10 @@
 .alert-icon  { flex-shrink: 0; font-size: 16px; margin-top: 1px; }
 .alert-body  { flex: 1; }
 .alert-title { font-weight: var(--font-weight-medium); margin-bottom: var(--space-1); }
-.alert-info    { background: var(--status-info-subtle);    border-color: var(--status-info);    color: var(--text-primary); }
-.alert-success { background: var(--status-success-subtle); border-color: var(--status-success); color: var(--text-primary); }
-.alert-warning { background: var(--status-warning-subtle); border-color: var(--status-warning); color: var(--text-primary); }
-.alert-error   { background: var(--status-error-subtle);   border-color: var(--status-error);   color: var(--text-primary); }
+.alert-info    { background: var(--status-info-bg);    border-color: var(--status-info);    color: var(--text-primary); }
+.alert-success { background: var(--status-success-bg); border-color: var(--status-success); color: var(--text-primary); }
+.alert-warning { background: var(--status-warning-bg); border-color: var(--status-warning); color: var(--text-primary); }
+.alert-error   { background: var(--status-error-bg);   border-color: var(--status-error);   color: var(--text-primary); }
 
 /* ------ Form ------ */
 .form-group { display: flex; flex-direction: column; gap: var(--space-1); }
@@ -126,7 +130,9 @@
   background: var(--bg-base);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  transition: border-color 120ms, box-shadow 120ms;
+  transition:
+    border-color var(--duration-fast) var(--easing-out),
+    box-shadow var(--duration-fast) var(--easing-out);
   outline: none;
   box-sizing: border-box;
   width: 100%;
@@ -149,7 +155,7 @@
 .form-input.is-error,
 .form-textarea.is-error { border-color: var(--status-error); }
 .form-input.is-error:focus,
-.form-textarea.is-error:focus { box-shadow: 0 0 0 3px var(--status-error-subtle); }
+.form-textarea.is-error:focus { box-shadow: 0 0 0 3px var(--status-error-bg); }
 .form-helper { font-size: var(--font-size-xs); color: var(--text-muted); }
 .form-error  { font-size: var(--font-size-xs); color: var(--status-error); }
 .form-textarea { min-height: 88px; resize: vertical; }
@@ -161,6 +167,46 @@
   background-position: right 10px center;
   padding-right: 28px;
 }
+
+/* ------ Combobox ------ */
+.combobox { position: relative; }
+.combobox-dropdown {
+  position: absolute;
+  top: calc(100% + var(--space-1));
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  z-index: 20;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.combobox-dropdown[hidden] { display: none; }
+.combobox-list { list-style: none; margin: 0; padding: var(--space-1) 0; }
+.combobox-option {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  transition: background var(--duration-fast) var(--easing-out);
+}
+.combobox-option:hover,
+.combobox-option.is-active { background: var(--bg-elevated); }
+.combobox-option.is-selected { color: var(--accent); font-weight: var(--font-weight-medium); }
+.combobox-option.is-selected::after { content: '✓'; margin-left: auto; font-size: var(--font-size-xs); }
+.combobox-option[hidden] { display: none; }
+.combobox-empty {
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  text-align: center;
+}
+.combobox-empty[hidden] { display: none; }
 
 /* ------ Checkbox ------ */
 .checkbox-wrap { display: flex; align-items: flex-start; gap: var(--space-2); cursor: pointer; }
@@ -184,7 +230,7 @@
   height: 22px;
   background: var(--border-strong);
   border-radius: var(--radius-full);
-  transition: background 150ms;
+  transition: background var(--duration-fast) var(--easing-out);
   flex-shrink: 0;
 }
 .toggle-track.on  { background: var(--accent); }
@@ -194,7 +240,7 @@
   width: 16px; height: 16px;
   background: white;
   border-radius: var(--radius-full);
-  transition: transform 150ms;
+  transition: transform var(--duration-fast) var(--easing-out);
   box-shadow: var(--shadow-sm);
 }
 .toggle-track.on .toggle-thumb { transform: translateX(18px); }
@@ -241,7 +287,7 @@
   border: 2px solid var(--border);
   border-top-color: var(--accent);
   border-radius: var(--radius-full);
-  animation: ds-spin 600ms linear infinite;
+  animation: ds-spin var(--duration-slower) linear infinite;
   flex-shrink: 0;
 }
 .spinner-sm { width: 14px; height: 14px; }
@@ -263,7 +309,9 @@
   margin-bottom: -1px;
   cursor: pointer;
   background: none;
-  transition: color 120ms, border-color 120ms;
+  transition:
+    color var(--duration-fast) var(--easing-out),
+    border-color var(--duration-fast) var(--easing-out);
   white-space: nowrap;
 }
 .tab-item-ui:hover  { color: var(--text-primary); }
@@ -374,7 +422,9 @@
   cursor: pointer;
   font-size: 16px;
   line-height: 1;
-  transition: background 120ms, color 120ms;
+  transition:
+    background var(--duration-fast) var(--easing-out),
+    color var(--duration-fast) var(--easing-out);
 }
 .modal-close:hover { background: var(--bg-elevated); color: var(--text-primary); }
 .modal-body {
@@ -393,7 +443,6 @@
   border-top: 1px solid var(--border);
   flex-shrink: 0;
 }
-/* バリアント: 上部ボーダーで重要度を示す */
 .modal-warning .modal-header { border-top: 3px solid var(--status-warning); border-radius: var(--radius-xl) var(--radius-xl) 0 0; }
 .modal-danger  .modal-header { border-top: 3px solid var(--status-error);   border-radius: var(--radius-xl) var(--radius-xl) 0 0; }
 
@@ -414,6 +463,8 @@
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 150ms, transform 150ms;
+  transition:
+    opacity var(--duration-fast) var(--easing-out),
+    transform var(--duration-fast) var(--easing-out);
   z-index: 10;
 }
